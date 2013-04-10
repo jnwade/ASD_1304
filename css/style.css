@@ -17,3 +17,7 @@ body {
 	text-shadow:  0px 1px 11px black;
 	border-radius: 17px;
 }
+
+p {
+	padding: 28px;
+}
