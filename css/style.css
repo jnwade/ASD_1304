@@ -1,0 +1,19 @@
+/*
+Jonathan Wade
+ASD 1304 Wk1
+*/
+
+
+body {
+	background-color: #9f9f9f;
+}
+
+.initialComment {
+	background-color: #1f3f79;
+	text-align: center;
+	color: #9f9f9f;
+	font-family: Helvetica;
+	padding: 20px;
+	text-shadow:  0px 1px 11px black;
+	border-radius: 17px;
+}
