@@ -21,24 +21,26 @@ $('#trackDuty').on('pageinit', function(){
 	//any other code needed for addItem page goes here
 	
 	// Global Variables
-	var check1 
-	var check2 
-	var check3 
+	var check1,
+		check2, 
+		check3,
+		id,
+		linksLi;
+		
 	
 	//Find Value of Checkbox 1
 	function getCheckValue1(){
-		checkVal1 = $("#inboxCheck1").val();
-		if( checkVal1 == 0 ){
+		if ($("#inboxCheck1").is(":checked")){
 			check1 = "Complete";
 		} else{
 			check1 = "Incomplete";
 		}
 	}
 	
+
   		//Find Value of Checkbox 2
 	function getCheckValue2(){
-		checkVal2 = $("#inboxCheck2").val();
-		if( checkVal2 == 0 ){
+		if ($("#inboxCheck2").is(":checked")){
 			check2 = "Complete";
 		} else{
 			check2 = "Incomplete";
@@ -47,8 +49,7 @@ $('#trackDuty').on('pageinit', function(){
 	
 			//Find Value of Checkbox 2
 	function getCheckValue3(){
-		checkVal3 = $("#reportCheck").val();
-		if( checkVal3 == 0 ){
+		if($("#reportCheck").is(":checked")){
 			check3 = "Complete";
 		} else{
 			check3 = "Incomplete";
@@ -56,10 +57,10 @@ $('#trackDuty').on('pageinit', function(){
 	}
   
 	//Stores form data into Local Storage
-	function storeData(key){
+	var storeData = function(data, key){
 	//If there is no key, this means this is a brand new item and we need a new key
 	if(!key){
-		var id 					= Math.floor(Math.random()*1000001);
+		 id 					= Math.floor(Math.random()*1000001);
 	}else{
 		//Set the id to the existing key we're editing so that it will save over the existing data.
 		//This is key is the same key that has been passed along from the editSubmit event handler
@@ -78,12 +79,11 @@ $('#trackDuty').on('pageinit', function(){
 			item.inboxCheck2	= ["Inbox Check 2: ", check2];
 			item.reportCheck	= ["Report Check: ", check3];
 			item.notes			= ["Notes: ", $("#notes").val()];
-		//Save data into Local Storage: Use "Stringify" to convert our objects to strings (Local storage can only store strings
+		
 		localStorage.setItem(id, JSON.stringify(item));
 		alert("Song Saved!");
-				
- 	}
- 	
+							
+ 	};
  	
  	
  	//Retreives data from local storage
@@ -98,15 +98,13 @@ $('#trackDuty').on('pageinit', function(){
 		 	var value = localStorage.getItem(key);
 		 	// Here we are converting our localStorage string value back into an object using JSON.parse().
 		 	var item = jQuery.parseJSON(value);	 	
-		 	$("makeLi").append("<ul></ul>").addClass("subList").attr("id" , "entry");
-		 	var makeSubList = $("#entry");
+		 	var makeSubList = $("makeLi").append("<ul></ul>").addClass("subList").attr("id" , "entry");
 		 	getImage(item.techName[1], makeSubList);
 		 	for(var n in item){
 		 		$("#entry").append("<li></li>").addClass("subList2").attr("id" , "makeSubLi");
 			 	var dataInfo = item[n][0]+" "+item[n][1];
 			 	$("#makeSubLi").html(dataInfo);
-			 	$("#makeSubLi").append("<li></li>").addClass("editDeleteLinks").attr("id" , "linksLi");
-			 	var linksLi = $("#linksLi");
+			 	linksLi = $("#makeSubLi").append("<li></li>").addClass("editDeleteLinks").attr("id" , "linksLi");
 			 	makeSubList.append(linksLi);
 		 	}
 		 	//Creates edit and delete links for each item submitted to local storage
