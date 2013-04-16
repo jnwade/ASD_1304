@@ -202,6 +202,7 @@ $('#trackDuty').on('pageinit', function(){
 
 $("#viewEmailLog").on("click" , getData);
 
+
 });
 
 
