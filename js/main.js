@@ -79,10 +79,14 @@ $('#trackDuty').on('pageinit', function(){
 			item.inboxCheck2	= ["Inbox Check 2: ", check2];
 			item.reportCheck	= ["Report Check: ", check3];
 			item.notes			= ["Notes: ", $("#notes").val()];
-		
+		//Saving object to local storage
 		localStorage.setItem(id, JSON.stringify(item));
 		alert("Song Saved!");
-							
+		//Triggering the form reset button to clear out data entered by end user
+		$("#resetButton").trigger("click");
+		//activating a transition back to the home page to start over once submission is complete
+		$.mobile.changePage("#home", { transition: "slide" });
+						
  	};
  	
  	
