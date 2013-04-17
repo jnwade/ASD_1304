@@ -16,6 +16,7 @@ $('#trackDuty').on('pageinit', function(){
 		var key = myForm.serializeArray();
 			storeData(key);
 		}
+		
 	});
 	
 	//any other code needed for addItem page goes here
@@ -213,4 +214,5 @@ $("#viewEmailLog").on("click" , getData);
 
 	
 	
+
 
