@@ -43,22 +43,10 @@ p {
 	padding-left: 2px;
 }
 
-.dataContainer {
-/* 	Div containing list item of local storage elements */
-}
 
-.dataList {
-	/* ul containing items pulled from local storage */
-}
+.imageAvatar {
 
-.editDeleteLinks {
-	/* li containing the edit and delete links for the dataView page */
 }
-
-.subList2 {
-	/* li that will contain the user images */
-}
-
 
 
 /*
