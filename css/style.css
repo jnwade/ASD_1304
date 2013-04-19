@@ -22,8 +22,9 @@ ASD 1304 Wk1
 }
 
 p {
-	text-align: center;
+	text-align: left;
 	line-height: 3px;
+	margin-left: 10px;
 }
 
 #dataView ol {
@@ -43,23 +44,18 @@ p {
 	padding-left: 2px;
 }
 
-.dataContainer {
-/* 	Div containing list item of local storage elements */
+
+#dataView ul img {
+	position: relative;
+	top: 5%;
+	left: 50%;
+	margin-left: 40px;
 }
 
-.dataList {
-	/* ul containing items pulled from local storage */
+.itemView {
+	border: #ffffff;
+	
 }
-
-.editDeleteLinks {
-	/* li containing the edit and delete links for the dataView page */
-}
-
-.subList2 {
-	/* li that will contain the user images */
-}
-
-
 
 /*
 * jQuery Mobile 1.3.1

@@ -4,9 +4,12 @@
 
 $('#home').on('pageinit', function(){
 	//code needed for home page goes here
+
 });	
 		
 $('#trackDuty').on('pageinit', function(){
+
+		$("#resetButton").trigger("click");
 
 		var myForm = $('#mainForm');
 		    myForm.validate({
@@ -16,10 +19,34 @@ $('#trackDuty').on('pageinit', function(){
 		var key = myForm.serializeArray();
 			storeData(key);
 		}
-		
 	});
 	
-	//any other code needed for addItem page goes here
+
+	
+
+	/*
+ $.ajax({
+		 type: 'POST',
+		 url: '',
+		 data: { },
+		 beforeSend:function(){
+			 // this is where we append a loading image
+			 $('#ajax-panel').html('<div class="loading"><img src="/images/loading.gif" alt="Loading..." /></div>');
+			 },
+			 success:function(data){
+				 // successful request; do something with the data
+				 $('#ajax-panel').empty();
+				 $(data).find('item').each(function(i){
+					 $('#ajax-panel').append('<h4>' + $(this).find('title').text() + '</h4><p>' + $(this).find('link').text() + '</p>');
+					 });
+					 },
+					 error:function(){
+						 // failed request; give feedback to user
+						 $('#ajax-panel').html('<p class="error"><strong>Oops!</strong> Try that again in a few moments.</p>');
+						 }
+});
+*/
+
 	
 	// Global Variables
 	var check1,
@@ -27,6 +54,8 @@ $('#trackDuty').on('pageinit', function(){
 		check3,
 		id,
 		linksLi;
+		
+
 		
 	
 	//Find Value of Checkbox 1
@@ -82,7 +111,7 @@ $('#trackDuty').on('pageinit', function(){
 			item.notes			= ["Notes: ", $("#notes").val()];
 		//Saving object to local storage
 		localStorage.setItem(id, JSON.stringify(item));
-		alert("Song Saved!");
+		alert("Log Saved");
 		//Triggering the form reset button to clear out data entered by end user
 		$("#resetButton").trigger("click");
 		//activating a transition back to the home page to start over once submission is complete
@@ -90,104 +119,87 @@ $('#trackDuty').on('pageinit', function(){
 						
  	};
  	
+ 		//Retreives data from local storage
+ 	$("#viewEmailLog").on('click', function getData(){
  	
- 	//Retreives data from local storage
- 	function getData(){
-	 	//Write data from localStorage to the Browser
-	 	$("#dataView").append("<div></div>").addClass("dataContainer").attr("id" , "item");
-	 	$("#item").append("<ul></ul>").addClass("dataList").attr("id" , "makeList");
-	 	$("#item").css("display" , "block");
-	 	for(var i = 0, j = localStorage.length; i<j; i++){
-	 		$("#makeList").append("<li></li>").addClass("listItem").attr("id" , "makeLi");	
-		 	var key = localStorage.key(i);
-		 	var value = localStorage.getItem(key);
-		 	// Here we are converting our localStorage string value back into an object using JSON.parse().
-		 	var item = jQuery.parseJSON(value);	 	
-		 	var makeSubList = $("makeLi").append("<ul></ul>").addClass("subList").attr("id" , "entry");
-		 	getImage(item.techName[1], makeSubList);
-		 	for(var n in item){
-		 		$("#entry").append("<li></li>").addClass("subList2").attr("id" , "makeSubLi");
-			 	var dataInfo = item[n][0]+" "+item[n][1];
-			 	$("#makeSubLi").html(dataInfo);
-			 	linksLi = $("#makeSubLi").append("<li></li>").addClass("editDeleteLinks").attr("id" , "linksLi");
-			 	makeSubList.append(linksLi);
-		 	}
-		 	//Creates edit and delete links for each item submitted to local storage
-		 	makeItemLinks(localStorage.key(i), linksLi); 	
-	 	}	
- 	}
  	
- 	function getImage(techName, makeSubList) {
-	 	//Get the image for the right catagory that's being displayed.alert
-	 	$("#entry").append("<li></li>").addClass("imgLink").attr("id" , "imageLink");
-	 	var imgLi = $("#imageLink");
-	 	makeSubList.append(imgLi);
-	 	var newImg = imgLi.append("<img/>").attr({"id" : "pic" , "src" : "img/" + techName + ".png"});
-	 	imgLi.append(newImg);
- 	}
- /*
-	function autoFillData() {
-	 	//Actual json object data required for this to work is coming from our json.js file which is loaded from our HTML page.
-	 	//Store json object into local storage.
-	 	for(var n in json){
-		 	var id = Math.floor(Math.random()*1000001);
-		 	localStorage.setItem(id, JSON.stringify(json[n]));
-	 	}
- 	}
-*/
+  		if(localStorage.length === 0) {
+	  		/* autoFillData(); */
+	  		alert("Nothing has been saved yet so default data has been added.");
+  }		
+  
+  		
+  	//Write data from localStorage to the Browser
+  			for(var i=0, j=localStorage.length; i<j; i++) {
+  				var dataView = $("#dataView");
+	  			var key = localStorage.key(i);
+	  			var value = localStorage.getItem(key);
+	  			var item = JSON.parse(value);
+	  			$('<section class="itemView">' +
+	  			  '<ul id="imgAvatar">' +	
+				  '<img src="img/' + item.techName[1] + '.png">' +
+				  '</ul>'+
+				  '<h5>' + item.techName[0] + item.techName[1] + '</h5>' +
+				  '<p>' + item.date[0] + item.date[1] + '</p>' +
+				  '<p>' + item.inboxCheck1[0] + item.inboxCheck1[1] + '</p>' +
+				  '<p>' + item.inboxCheck2[0] + item.inboxCheck2[1] + '</p>' +
+				  '<p>' + item.reportCheck[0] + item.reportCheck[1] + '</p>' +
+				  '<p>' + item.notes[0] + item.notes[1] + '</p>' +
+				  '<a href="#" id="deleteItem" data-key="' + key + '" data-role="button" data-mini="true" data-inline="true" data-icon="check" data-theme="b">Delete</a>' + 
+				  '<a href="#trackDuty" id="editItem" data-key="' + key + '" data-role="button" data-transition="slide" data-mini="true" data-inline="true">Edit</a>' + 
+				  '</section>'
+				  ).appendTo(dataView);
+				  
+				  
+	  			
+		  		}
+
+});
+ 
+
  	
- 	//Make Item Links
- 	//Creates the edit and delete links for each stored item when displayed
- 	function makeItemLinks(key, linksLi) {
- 		//Add edit single item link
- 		var editLink = $("#linksLi").append("<a></a>").attr({"href" : "#" , "id" : "editLink"});
-	 	editLink.key = key;
-	 	var editText = "Edit";
-	 	editLink.on("click", editItem);
-	 	editLink.html(editText);
-	 	
-	 	//Add delete single item link	 	
-	 	var deleteLink = $("#linksLi").append("<a></a>").attr({"href" : "#" , "id" : "deleteLink"});
-	 	deleteLink.key = key;
-	 	var deleteText = "Delete";
-	 	deleteLink.on("click", deleteItem);
-	 	deleteLink.html(deleteText);
-	 	
- 	}
  	
- 	function editItem() {
+ 	
+$("#editItem").on('click', function editItem() {
+
+		
 		//Grab the data for our items in Local Storage
 		var value = localStorage.getItem(this.key);
-		var item = jQuery.parseJSON(value);
-			
+		var item = JSON.parse(value);
+		
+		
 		//Populate the form fields with current localStorage values.
-		$("#techName").value = item.techName[1];
-		$("#date").value = item.date[1];
-		$("#inboxCheck1").value = item.inboxCheck1[1];
-		$("#inboxCheck2").value = item.inboxCheck2[1];
-		$("#reportCheck").value = item.inboxCheck3[1];
-		$("#notes").value = item.notes[1];
-		
-		
-		
-		//For Check Box
-		if(item.inboxCheck1[1] == "on") {
+		$("#techName").val(item.techName[1]);
+		console.log(item.techName[1]);
+		$("#date").val(item.date[1]);
+		$("#inboxCheck1").val(item.inboxCheck1[1]);
+		$("#inboxCheck2").val(item.inboxCheck2[1]);
+		$("#reportCheck").val(item.inboxCheck3[1]);
+		$("#notes").val(item.notes[1]);
+		//For Check Boxes
+		if(item.inboxCheck1[1] == "Completed") {
 			$("#inboxCheck1").attr("checked", "checked");
 		}
-		$("notes").value = item.notes[1];
+		if(item.inboxCheck2[1] == "Completed") {
+			$("#inboxCheck2").attr("checked", "checked");
+		}
+		if(item.reportCheck[1] == "Completed") {
+			$("#reportCheck").attr("checked", "checked");
+		}
 		
- 	}
+
+ 	});
  	
- 	function deleteItem() {
+$("#deleteItem").on('click', function deleteItem() {
 	 	var ask = confirm("Delete log?");
 	 	if(ask) {
 		 	localStorage.removeItem(this.key);
 		 	window.location.reload();
 	 	}else{
-		 	alert("Whew, that was a close one!");
+		 	alert("That was a close call");
 		 	
 	 	}
- 	}
+ 	});
  	
  	//Clears local storage
  	function clearLocal() {
@@ -201,7 +213,8 @@ $('#trackDuty').on('pageinit', function(){
  		}
  	 }
 
-$("#viewEmailLog").on("click" , getData);
+
+
 
 });
 
@@ -214,5 +227,4 @@ $("#viewEmailLog").on("click" , getData);
 
 	
 	
-
 
