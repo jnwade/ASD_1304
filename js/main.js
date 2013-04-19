@@ -24,28 +24,22 @@ $('#trackDuty').on('pageinit', function(){
 
 	
 
-	/*
- $.ajax({
-		 type: 'POST',
-		 url: '',
+	 $.ajax({
+		 type: 'GET',
+		 url: 'json.js',
 		 data: { },
-		 beforeSend:function(){
-			 // this is where we append a loading image
-			 $('#ajax-panel').html('<div class="loading"><img src="/images/loading.gif" alt="Loading..." /></div>');
-			 },
 			 success:function(data){
 				 // successful request; do something with the data
 				 $('#ajax-panel').empty();
 				 $(data).find('item').each(function(i){
-					 $('#ajax-panel').append('<h4>' + $(this).find('title').text() + '</h4><p>' + $(this).find('link').text() + '</p>');
+					 $('#ajax-panel').append('<h1>Error</h1>');
 					 });
 					 },
 					 error:function(){
 						 // failed request; give feedback to user
-						 $('#ajax-panel').html('<p class="error"><strong>Oops!</strong> Try that again in a few moments.</p>');
+						 $('#ajax-panel').html('<p class="error">No Go!</p>');
 						 }
 });
-*/
 
 	
 	// Global Variables
