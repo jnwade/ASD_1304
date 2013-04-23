@@ -5,6 +5,9 @@
 $('#home').on('pageinit', function(){
 	//code needed for home page goes here
 
+
+
+
 });	
 		
 $('#trackDuty').on('pageinit', function(){
@@ -115,6 +118,15 @@ $('#trackDuty').on('pageinit', function(){
 						
  	};
  	
+ });
+ 
+ 
+ $('#emailData').on('pageinit', function(){
+	//code needed for emailData page goes here
+
+
+
+ 	
  		//Retreives data from local storage
  	$("#viewEmailLog").on('click', function getData(){
  	
@@ -122,10 +134,10 @@ $('#trackDuty').on('pageinit', function(){
   		if(localStorage.length === 0) {
 	  		/* autoFillData(); */
 	  		alert("Nothing has been saved yet so default data has been added.");
-  }		
+	  		}		
   
   		
-  	//Write data from localStorage to the Browser
+	  		//Write data from localStorage to the Browser
   			for(var i=0, j=localStorage.length; i<j; i++) {
   				var dataView = $("#dataView");
 	  			var key = localStorage.key(i);
@@ -141,8 +153,8 @@ $('#trackDuty').on('pageinit', function(){
 				  '<p>' + item.inboxCheck2[0] + item.inboxCheck2[1] + '</p>' +
 				  '<p>' + item.reportCheck[0] + item.reportCheck[1] + '</p>' +
 				  '<p>' + item.notes[0] + item.notes[1] + '</p>' +
-				  '<a href="#" onclick="deleteItem(' + key + ');" data-role="button" data-mini="true" data-inline="true" data-icon="check" data-theme="b">Delete</a>' + 
-				  '<a href="#trackDuty" onclick="editItem(' + key + ');" data-role="button" data-transition="slide" data-mini="true" data-inline="true">Edit</a>' + 
+				  '<a href="#" class="deleteLog" data-role="button" data-mini="true" data-inline="true" data-icon="check" data-theme="b">Delete</a>' + 
+				  '<a href="#trackDuty" class="editLog" data-role="button" data-transition="slide" data-mini="true" data-inline="true">Edit</a>' + 
 				  '</section>'
 				  ).appendTo(dataView);
 				  
@@ -150,14 +162,14 @@ $('#trackDuty').on('pageinit', function(){
 	  			
 		  		}
 
-});
+	});
  
 
  	
  	
 
  	
-	function editItem(id) {
+	$(".editLog").on("click", function(id) {
 
 		
 		//Grab the data for our items in Local Storage
@@ -167,7 +179,6 @@ $('#trackDuty').on('pageinit', function(){
 		
 		//Populate the form fields with current localStorage values.
 		$("#techName").val(item.techName[1]);
-		console.log(item.techName[1]);
 		$("#date").val(item.date[1]);
 		$("#inboxCheck1").val(item.inboxCheck1[1]);
 		$("#inboxCheck2").val(item.inboxCheck2[1]);
@@ -185,10 +196,10 @@ $('#trackDuty').on('pageinit', function(){
 		}
 		
 
- 	};
+ 	});
 
  	
-	function deleteItem(){
+	$(".deleteLog").on("click", function(){
 	 	var ask = confirm("Delete log?");
 	 	if(ask) {
 	 		var logEntry = $(this).key;
@@ -198,7 +209,7 @@ $('#trackDuty').on('pageinit', function(){
 		 	alert("That was a close call");
 		 	
 	 	}
- 	};
+ 	});
  	
  	//Clears local storage
  	function clearLocal() {
@@ -213,8 +224,7 @@ $('#trackDuty').on('pageinit', function(){
  	 }
 
 
-});
-
+});	
 
 
 
