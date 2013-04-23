@@ -12,7 +12,11 @@ $('#home').on('pageinit', function(){
 		
 $('#trackDuty').on('pageinit', function(){
 
-		$("#resetButton").trigger("click");
+
+	jQuery.fn.reset = function () {
+		$(this).each (function() { this.reset(); });
+	}
+
 
 		var myForm = $('#mainForm');
 		    myForm.validate({
@@ -24,7 +28,7 @@ $('#trackDuty').on('pageinit', function(){
 		}
 	});
 	
-
+	$("#mainForm").reset();
 	
 
 	/*
@@ -111,26 +115,20 @@ $('#trackDuty').on('pageinit', function(){
 		//Saving object to local storage
 		localStorage.setItem(id, JSON.stringify(item));
 		alert("Log Saved");
-		//Triggering the form reset button to clear out data entered by end user
-		$("#resetButton").trigger("click");
+		$("#mainForm").reset();
 		//activating a transition back to the home page to start over once submission is complete
 		$.mobile.changePage("#home", { transition: "slide" });
 						
  	};
  	
- });
- 
- 
- $('#emailData').on('pageinit', function(){
-	//code needed for emailData page goes here
 
-
+ 
 
  	
  		//Retreives data from local storage
  	$("#viewEmailLog").on('click', function getData(){
  	
- 	
+ 		
   		if(localStorage.length === 0) {
 	  		/* autoFillData(); */
 	  		alert("Nothing has been saved yet so default data has been added.");
@@ -163,9 +161,14 @@ $('#trackDuty').on('pageinit', function(){
 		  		}
 
 	});
+	
+});
+ 
  
 
- 	
+ $('#emailData').on('pageinit', function(){
+//code needed for emailData page goes here
+
  	
 
  	
@@ -200,6 +203,7 @@ $('#trackDuty').on('pageinit', function(){
 
  	
 	$(".deleteLog").on("click", function(){
+	console.log($("hello"));
 	 	var ask = confirm("Delete log?");
 	 	if(ask) {
 	 		var logEntry = $(this).key;
@@ -224,7 +228,7 @@ $('#trackDuty').on('pageinit', function(){
  	 }
 
 
-});	
+});
 
 
 
