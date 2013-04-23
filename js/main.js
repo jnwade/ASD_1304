@@ -141,8 +141,8 @@ $('#trackDuty').on('pageinit', function(){
 				  '<p>' + item.inboxCheck2[0] + item.inboxCheck2[1] + '</p>' +
 				  '<p>' + item.reportCheck[0] + item.reportCheck[1] + '</p>' +
 				  '<p>' + item.notes[0] + item.notes[1] + '</p>' +
-				  '<a href="#" id="deleteItem" onclick=deleteItem(' + key + ') data-role="button" data-mini="true" data-inline="true" data-icon="check" data-theme="b">Delete</a>' + 
-				  '<a href="#trackDuty" id="editItem" onclick=editItem(' + key + ') data-role="button" data-transition="slide" data-mini="true" data-inline="true">Edit</a>' + 
+				  '<a href="#" onclick="deleteItem(' + key + ');" data-role="button" data-mini="true" data-inline="true" data-icon="check" data-theme="b">Delete</a>' + 
+				  '<a href="#trackDuty" onclick="editItem(' + key + ');" data-role="button" data-transition="slide" data-mini="true" data-inline="true">Edit</a>' + 
 				  '</section>'
 				  ).appendTo(dataView);
 				  
