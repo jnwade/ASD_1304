@@ -24,7 +24,8 @@ $('#trackDuty').on('pageinit', function(){
 
 	
 
-	 $.ajax({
+	/*
+ $.ajax({
 		 type: 'GET',
 		 url: 'json.js',
 		 data: { },
@@ -40,6 +41,7 @@ $('#trackDuty').on('pageinit', function(){
 						 $('#ajax-panel').html('<p class="error">No Go!</p>');
 						 }
 });
+*/
 
 	
 	// Global Variables
@@ -139,8 +141,8 @@ $('#trackDuty').on('pageinit', function(){
 				  '<p>' + item.inboxCheck2[0] + item.inboxCheck2[1] + '</p>' +
 				  '<p>' + item.reportCheck[0] + item.reportCheck[1] + '</p>' +
 				  '<p>' + item.notes[0] + item.notes[1] + '</p>' +
-				  '<a href="#" id="deleteItem" data-key="' + key + '" data-role="button" data-mini="true" data-inline="true" data-icon="check" data-theme="b">Delete</a>' + 
-				  '<a href="#trackDuty" id="editItem" data-key="' + key + '" data-role="button" data-transition="slide" data-mini="true" data-inline="true">Edit</a>' + 
+				  '<a href="#" id="deleteItem" onclick=deleteItem(' + key + ') data-role="button" data-mini="true" data-inline="true" data-icon="check" data-theme="b">Delete</a>' + 
+				  '<a href="#trackDuty" id="editItem" onclick=editItem(' + key + ') data-role="button" data-transition="slide" data-mini="true" data-inline="true">Edit</a>' + 
 				  '</section>'
 				  ).appendTo(dataView);
 				  
@@ -153,12 +155,13 @@ $('#trackDuty').on('pageinit', function(){
 
  	
  	
+
  	
-$("#editItem").on('click', function editItem() {
+	function editItem(id) {
 
 		
 		//Grab the data for our items in Local Storage
-		var value = localStorage.getItem(this.key);
+		var value = localStorage.getItem(id);
 		var item = JSON.parse(value);
 		
 		
@@ -182,18 +185,20 @@ $("#editItem").on('click', function editItem() {
 		}
 		
 
- 	});
+ 	};
+
  	
-$("#deleteItem").on('click', function deleteItem() {
+	function deleteItem(){
 	 	var ask = confirm("Delete log?");
 	 	if(ask) {
-		 	localStorage.removeItem(this.key);
+	 		var logEntry = $(this).key;
+		 	localStorage.removeItem(logEntry);
 		 	window.location.reload();
 	 	}else{
 		 	alert("That was a close call");
 		 	
 	 	}
- 	});
+ 	};
  	
  	//Clears local storage
  	function clearLocal() {
@@ -206,8 +211,6 @@ $("#deleteItem").on('click', function deleteItem() {
 	 		return false;
  		}
  	 }
-
-
 
 
 });
