@@ -23,8 +23,9 @@ $('#trackDuty').on('pageinit', function(){
 		});
 	};
 	
+	$("#mainForm").reset();
 
-	var myForm = $('#mainForm');
+	var myForm = $("#mainForm");
 	    myForm.validate({
 		invalidHandler: function(form, validator) {
 		},
@@ -154,7 +155,7 @@ $("#emailData").on('pageinit', function(){
 		alert("Nothing has been saved yet so default data has been added.");
 		return false;
 		}else{
-		$('#dataview').empty();						
+		$("#dataView").empty();						
 				
 		//Write data from localStorage to the Browser
 		for(var i=0, j=localStorage.length; i<j; i++) {
@@ -162,22 +163,23 @@ $("#emailData").on('pageinit', function(){
 				var key = localStorage.key(i);
 				var value = localStorage.getItem(key);
 				var item = JSON.parse(value);
-				$('<section class="itemView">' +
-					'<div class="bodyText">' +
-					  '<ul id="imgAvatar">' +	
+				$('<ul class="bodyText">' +
+					  '<li id="imgAvatar">' +	
 					  	'<img src="img/' + item.techName[1] + '.png">' +
-					  '</ul>'+
-					  '<h5>' + item.techName[0] + item.techName[1] + '</h5>' +
-					  '<p>' + item.date[0] + item.date[1] + '</p>' +
-					  '<p>' + item.inboxCheck1[0] + item.inboxCheck1[1] + '</p>' +
-					  '<p>' + item.inboxCheck2[0] + item.inboxCheck2[1] + '</p>' +
-					  '<p>' + item.reportCheck[0] + item.reportCheck[1] + '</p>' +
-					  '<p>' + item.notes[0] + item.notes[1] + '</p>' +
-					  '</div>' +
-					  '<a href="#" class="deleteLog" data-key="' + item.key + '" data-role="button" data-mini="true" data-inline="true" data-icon="delete" data-theme="b">Delete</a>' + 
-					  '<a href="#trackDuty" class="editLog" data-key="' + item.key + '" data-role="button" data-transition="slide" data-mini="true" data-inline="true" data-icon="edit" data-theme="b">Edit</a>' + 
-					'</section>'
+					  '</li>'+
+					  '<li>'+'<h5>' + item.techName[0] + item.techName[1] + '<h5>' + '</li>' +
+					  '<li>' + item.date[0] + item.date[1] + '</li>' +
+					  '<li>' + item.inboxCheck1[0] + item.inboxCheck1[1] + '</li>' +
+					  '<li>' + item.inboxCheck2[0] + item.inboxCheck2[1] + '</li>' +
+					  '<li>' + item.reportCheck[0] + item.reportCheck[1] + '</li>' +
+					  '<li>' + item.notes[0] + item.notes[1] + '</li>' +
+					  '</ul>' +
+					  '<li>' + '<a href="#" class="deleteLog" data-key="' + item.key + '" data-role="button" data-mini="true" data-inline="true" data-icon="delete" data-theme="b">Delete</a>' + '</li>' +
+					  '<li>' + '<a href="#trackDuty" class="editLog" data-key="' + item.key + '" data-role="button" data-transition="slide" data-mini="true" data-inline="true" data-icon="edit" data-theme="b">Edit</a>' + '</li>' +
+					'</ul>' + 
+				   '</li>'
 					).appendTo(dataView);
+					$("#dataView").listview("refresh");
 					
 		};
 	
