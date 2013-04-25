@@ -159,7 +159,7 @@ $("#emailData").on('pageinit', function(){
 				
 		//Write data from localStorage to the Browser
 		for(var i=0, j=localStorage.length; i<j; i++) {
-				var dataView = $("#dataView");
+				var itemView = $(".itemView");
 				var key = localStorage.key(i);
 				var value = localStorage.getItem(key);
 				var item = JSON.parse(value);
@@ -178,7 +178,7 @@ $("#emailData").on('pageinit', function(){
 					  '<li>' + '<a href="#trackDuty" class="editLog" data-key="' + item.key + '" data-role="button" data-transition="slide" data-mini="true" data-inline="true" data-icon="edit" data-theme="b">Edit</a>' + '</li>' +
 					'</ul>' + 
 				   '</li>'
-					).appendTo(dataView);
+					).appendTo(itemView);
 					$("#dataView").listview("refresh");
 					
 		};
