@@ -146,18 +146,15 @@ var key;
 
 
 
-$('#logs').on('pageinit', function(){
-//code needed for emailData page goes here
- 	
 
  //Retreives data from local storage
-$("#viewEmailLog").on('click', function getData(){	
+$("#emailData").on('pageinit', function(){	
 	if(localStorage.length === 0) {
 		/* autoFillData(); */
 		alert("Nothing has been saved yet so default data has been added.");
 		return false;
 		}else{
-									
+		$('#dataview').empty();						
 				
 		//Write data from localStorage to the Browser
 		for(var i=0, j=localStorage.length; i<j; i++) {
@@ -186,18 +183,12 @@ $("#viewEmailLog").on('click', function getData(){
 	
 	};
 
-});
 
-});
+
  
 //*************************************
 //*************************************
 //  ui-btn ui-shadow ui-btn-corner-all ui-mini ui-btn-inline ui-btn-icon-left ui-btn-up-b
-
-$('#emailData').on('pageinit', function(){
-//code needed for emailData page goes here
-
- 	
 
  	
 $(".editLog").on("click", function(id) {	
