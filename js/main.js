@@ -18,21 +18,26 @@ $('#home').on('pageinit', function(){
 $('#trackDuty').on('pageinit', function(){
 	
 	jQuery.fn.reset = function () {
-		$(this).each (function() { this.reset(); });
-	}
-
+		$(this).each (function() { 
+			this.reset(); 
+		});
+	};
+	
 
 	var myForm = $('#mainForm');
 	    myForm.validate({
 		invalidHandler: function(form, validator) {
 		},
 		submitHandler: function() {
-	var key = myForm.serializeArray();
-		storeData(key);
-	}
+		var data = myForm.serializeArray();
+		storeData(data);
+		}
+		
+		//Will need to work out an if else statement to determine if there is a key or not.
+	});
 });
 	
-$("#mainForm").reset();
+/* $("#mainForm").reset(); */
 	
 
 	/*
@@ -55,11 +60,12 @@ $("#mainForm").reset();
 */
 
 	
+
+	
+	
 // Global Variables
-var check1,
-	check2, 
-	check3,
-	id,
+ 
+var	id,
 	linksLi;
 		
 
@@ -67,35 +73,44 @@ var check1,
 	
 //Find Value of Checkbox 1
 function getCheckValue1(){
+	var check1;
 	if ($("#inboxCheck1").is(":checked")){
 		check1 = "Complete";
 	} else{
 		check1 = "Incomplete";
 	}
+	return check1;
 }
 	
 
 //Find Value of Checkbox 2
 function getCheckValue2(){
+	var check2;
 	if ($("#inboxCheck2").is(":checked")){
 		check2 = "Complete";
 	} else{
 		check2 = "Incomplete";
 	}
+	return check2;
 }
 
 //Find Value of Checkbox 2
 function getCheckValue3(){
+	var check3;
 	if($("#reportCheck").is(":checked")){
 		check3 = "Complete";
 	} else{
 		check3 = "Incomplete";
 	}
+	 return check3;
 }
   
 //Stores form data into Local Storage
-var storeData = function(data, key){
+var storeData = function(data){
 //If there is no key, this means this is a brand new item and we need a new key
+	/*
+var key;
+
 	if(!key){
 		 	
 		id = Math.floor(Math.random()*1000001);
@@ -105,35 +120,45 @@ var storeData = function(data, key){
 		id = key;
 	
 	}
-		
-	getCheckValue1();
-	getCheckValue2();
-	getCheckValue3();
+*/
+	
+	id = Math.floor(Math.random()*1000001);
+
+	
+	console.log("data",data );
+	
 	var item 				= {};
 		item.techName		= ["Tech Name: ", $("#techName").val()];
 		item.date			= ["Date: ", $("#date").val()];
-		item.inboxCheck1	= ["Inbox Check 1: ", check1];
-		item.inboxCheck2	= ["Inbox Check 2: ", check2];
-		item.reportCheck	= ["Report Check: ", check3];
+		item.inboxCheck1	= ["Inbox Check 1: ", getCheckValue1()];
+		item.inboxCheck2	= ["Inbox Check 2: ", getCheckValue2()];
+		item.reportCheck	= ["Report Check: ", getCheckValue3()];
 		item.notes			= ["Notes: ", $("#notes").val()];
+		item.key = id;
 	//Saving object to local storage
 	localStorage.setItem(id, JSON.stringify(item));
 	alert("Log Saved");
-	$("#mainForm").reset();
+
 	//activating a transition back to the home page to start over once submission is complete
 	$.mobile.changePage("#home", { transition: "slide" });
 					
 };
+
+
+
+$('#logs').on('pageinit', function(){
+//code needed for emailData page goes here
  	
 
  //Retreives data from local storage
-$("#viewEmailLog").on('click', function getData(){			
+$("#viewEmailLog").on('click', function getData(){	
 	if(localStorage.length === 0) {
 		/* autoFillData(); */
 		alert("Nothing has been saved yet so default data has been added.");
-		}		
-	
-	
+		return false;
+		}else{
+									
+				
 		//Write data from localStorage to the Browser
 		for(var i=0, j=localStorage.length; i<j; i++) {
 				var dataView = $("#dataView");
@@ -141,6 +166,7 @@ $("#viewEmailLog").on('click', function getData(){
 				var value = localStorage.getItem(key);
 				var item = JSON.parse(value);
 				$('<section class="itemView">' +
+					'<div class="bodyText">' +
 					  '<ul id="imgAvatar">' +	
 					  	'<img src="img/' + item.techName[1] + '.png">' +
 					  '</ul>'+
@@ -150,19 +176,23 @@ $("#viewEmailLog").on('click', function getData(){
 					  '<p>' + item.inboxCheck2[0] + item.inboxCheck2[1] + '</p>' +
 					  '<p>' + item.reportCheck[0] + item.reportCheck[1] + '</p>' +
 					  '<p>' + item.notes[0] + item.notes[1] + '</p>' +
-					  '<a href="#" class="deleteLog" data-role="button" data-mini="true" data-inline="true" data-icon="check" data-theme="b">Delete</a>' + 
-					  '<a href="#trackDuty" class="editLog" data-role="button" data-transition="slide" data-mini="true" data-inline="true">Edit</a>' + 
+					  '</div>' +
+					  '<a href="#" class="deleteLog" data-key="' + item.key + '" data-role="button" data-mini="true" data-inline="true" data-icon="delete" data-theme="b">Delete</a>' + 
+					  '<a href="#trackDuty" class="editLog" data-key="' + item.key + '" data-role="button" data-transition="slide" data-mini="true" data-inline="true" data-icon="edit" data-theme="b">Edit</a>' + 
 					'</section>'
 					).appendTo(dataView);
-		}
-
-	});
+					
+		};
 	
+	};
+
+});
+
 });
  
 //*************************************
 //*************************************
- 
+//  ui-btn ui-shadow ui-btn-corner-all ui-mini ui-btn-inline ui-btn-icon-left ui-btn-up-b
 
 $('#emailData').on('pageinit', function(){
 //code needed for emailData page goes here
@@ -203,15 +233,18 @@ $(".editLog").on("click", function(id) {
 
  	
 $(".deleteLog").on("click", function(key){
-	console.log($("hello"));
+	console.log($(this).data("key") , ' <-- If this is a number, this this is working');
 	var ask = confirm("Delete log?");
 		if(ask) {
-		 	localStorage.removeItem(this.key);
-		 	console.log("hello");
-		 	window.location.reload();
-	 	}else{
-		 	alert("That was a close call");
-		 	
+		 	localStorage.removeItem($(this).data("key"));
+		 	 //need an if else statement that will check to see if localstorage exists. If it does it will stay on the page. If not it will need to return to the home page.
+		 	 if(localStorage.length === 0) {
+			 	 $.mobile.changePage("#home", { transition: "slide" });
+		 	 } else {
+			 	return false;
+		 	 }
+	 	} else {
+		 	alert("Whew, that was close!");
 	 	}
  	});
  	

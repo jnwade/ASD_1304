@@ -53,7 +53,9 @@ p {
 }
 
 .itemView {
-	border: #ffffff;
+	border-style: -moz-bg-outset;
+	border-color: black;
+	padding: 2px;
 	
 }
 
