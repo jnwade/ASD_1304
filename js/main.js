@@ -174,7 +174,6 @@ $("#emailData").on('pageinit', function(){
 					  '<li>' + item.inboxCheck2[0] + item.inboxCheck2[1] + '</li>' +
 					  '<li>' + item.reportCheck[0] + item.reportCheck[1] + '</li>' +
 					  '<li>' + item.notes[0] + item.notes[1] + '</li>' +
-					  '</ul>' +
 					  '<li>' + '<a href="#" class="deleteLog" data-key="' + item.key + '" data-role="button" data-mini="true" data-inline="true" data-icon="delete" data-theme="b">Delete</a>' + '</li>' +
 					  '<li>' + '<a href="#trackDuty" class="editLog" data-key="' + item.key + '" data-role="button" data-transition="slide" data-mini="true" data-inline="true" data-icon="edit" data-theme="b">Edit</a>' + '</li>' +
 					'</ul>' + 
@@ -227,7 +226,7 @@ $(".editLog").on("click", function(id) {
 });
 
  	
-$(".deleteLog").on("click", function(key){
+$(".deleteLog").on("click", function(){
 	console.log($(this).data("key") , ' <-- If this is a number, this this is working');
 	var ask = confirm("Delete log?");
 		if(ask) {
@@ -236,7 +235,8 @@ $(".deleteLog").on("click", function(key){
 		 	 if(localStorage.length === 0) {
 			 	 $.mobile.changePage("#home", { transition: "slide" });
 		 	 } else {
-			 	return false;
+			 	$.mobile.changePage("#logs", { transition: "slide" });
+
 		 	 }
 	 	} else {
 		 	alert("Whew, that was close!");
