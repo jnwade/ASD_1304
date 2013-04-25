@@ -159,11 +159,12 @@ $("#emailData").on('pageinit', function(){
 				
 		//Write data from localStorage to the Browser
 		for(var i=0, j=localStorage.length; i<j; i++) {
-				var itemView = $(".itemView");
+				var dataView = $("#dataView");
 				var key = localStorage.key(i);
 				var value = localStorage.getItem(key);
 				var item = JSON.parse(value);
-				$('<ul class="bodyText">' +
+				$('<li class="itemView">' +
+					'<ul class="bodyText">' +
 					  '<li id="imgAvatar">' +	
 					  	'<img src="img/' + item.techName[1] + '.png">' +
 					  '</li>'+
@@ -178,7 +179,7 @@ $("#emailData").on('pageinit', function(){
 					  '<li>' + '<a href="#trackDuty" class="editLog" data-key="' + item.key + '" data-role="button" data-transition="slide" data-mini="true" data-inline="true" data-icon="edit" data-theme="b">Edit</a>' + '</li>' +
 					'</ul>' + 
 				   '</li>'
-					).appendTo(itemView);
+					).appendTo(dataView);
 					
 					
 		};
