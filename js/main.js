@@ -179,13 +179,14 @@ $("#emailData").on('pageinit', function(){
 					'</ul>' + 
 				   '</li>'
 					).appendTo(itemView);
-					$("#dataView").listview("refresh");
+					
 					
 		};
-	
+		
+		
 	};
 
-
+  $("#dataView").listview("refresh");
 
  
 //*************************************
