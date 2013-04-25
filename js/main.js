@@ -1,29 +1,50 @@
 // Jonathan Wade
-// ASD 1304 Wk1
-// Meaningful Commit
+// ASD 1304 Wk3
 
-//*************************************
-//*************************************
+
+
+//*************************************************************************
+//*************************************************************************
+//*************************************************************************
+//*************************************************************************
+
+
 
 $('#home').on('pageinit', function(){
-	//code needed for home page goes here
+//code needed for home page goes here
 
 
+//-------------------------------------------------------------------------
 
+
+$("#mainForm").each(function(){
+	this.reset();
+});
+
+
+//-------------------------------------------------------------------------
+
+
+$("#dataView").empty();
+		
+
+//End of home Pageinit
 });	
 
-//*************************************
-//*************************************
+
+
+//*************************************************************************
+//*************************************************************************
+//*************************************************************************
+//*************************************************************************
+
 		
 $('#trackDuty').on('pageinit', function(){
-	
-	jQuery.fn.reset = function () {
-		$(this).each (function() { 
-			this.reset(); 
-		});
-	};
-	
-	$("#mainForm").reset();
+//code needed for trackDuty page goes here
+
+
+//-------------------------------------------------------------------------	
+
 
 	var myForm = $("#mainForm");
 	    myForm.validate({
@@ -32,11 +53,13 @@ $('#trackDuty').on('pageinit', function(){
 		submitHandler: function() {
 		var data = myForm.serializeArray();
 		storeData(data);
+		$("#mainForm").each(function(){
+			this.reset();
+		});
 		}
 		
-		//Will need to work out an if else statement to determine if there is a key or not.
+//Will need to work out an if else statement to determine if there is a key or not.
 	});
-});
 	
 /* $("#mainForm").reset(); */
 	
@@ -61,19 +84,19 @@ $('#trackDuty').on('pageinit', function(){
 */
 
 	
-
+	
+//-------------------------------------------------------------------------
 	
 	
-// Global Variables
- 
-var	id,
-	linksLi;
+// Global Variables 
+var	id;
 		
 
+//-------------------------------------------------------------------------
 		
-	
-//Find Value of Checkbox 1
+
 function getCheckValue1(){
+//Find Value of Checkbox 1
 	var check1;
 	if ($("#inboxCheck1").is(":checked")){
 		check1 = "Complete";
@@ -84,8 +107,11 @@ function getCheckValue1(){
 }
 	
 
-//Find Value of Checkbox 2
+//-------------------------------------------------------------------------
+
+
 function getCheckValue2(){
+//Find Value of Checkbox 2
 	var check2;
 	if ($("#inboxCheck2").is(":checked")){
 		check2 = "Complete";
@@ -95,8 +121,12 @@ function getCheckValue2(){
 	return check2;
 }
 
-//Find Value of Checkbox 2
+
+//-------------------------------------------------------------------------
+
+
 function getCheckValue3(){
+//Find Value of Checkbox 2
 	var check3;
 	if($("#reportCheck").is(":checked")){
 		check3 = "Complete";
@@ -106,8 +136,13 @@ function getCheckValue3(){
 	 return check3;
 }
   
-//Stores form data into Local Storage
+  
+//-------------------------------------------------------------------------
+  
+
 var storeData = function(data){
+//Stores form data into Local Storage
+
 //If there is no key, this means this is a brand new item and we need a new key
 	/*
 var key;
@@ -139,7 +174,6 @@ var key;
 	//Saving object to local storage
 	localStorage.setItem(id, JSON.stringify(item));
 	alert("Log Saved");
-
 	//activating a transition back to the home page to start over once submission is complete
 	$.mobile.changePage("#home", { transition: "slide" });
 					
@@ -147,51 +181,65 @@ var key;
 
 
 
+//End of trackDuty Pageinit
+});
 
- //Retreives data from local storage
-$("#emailData").on('pageinit', function(){	
+
+
+//*************************************************************************
+//*************************************************************************
+//*************************************************************************
+//*************************************************************************
+
+
+
+
+
+$("#emailData").on('pageinit', function(){
+	//Retreives data from local storage
 	if(localStorage.length === 0) {
 		/* autoFillData(); */
 		alert("Nothing has been saved yet so default data has been added.");
-		return false;
+		 $.mobile.changePage("#trackDuty", { transition: "slide" });
 		}else{
-		$("#dataView").empty();						
+		$("#dataView").empty();
 				
-		//Write data from localStorage to the Browser
 		for(var i=0, j=localStorage.length; i<j; i++) {
+		//Write data from localStorage to the Browser
 				var dataView = $("#dataView");
 				var key = localStorage.key(i);
 				var value = localStorage.getItem(key);
 				var item = JSON.parse(value);
-				$('<li class="itemView">' +
+				$('<li class="itemView">' + 
+					'<h6>' + item.techName[1] + " :: " + item.date[1] + '</h6>' + 
 					'<ul class="bodyText">' +
 					  '<li id="imgAvatar">' +	
 					  	'<img src="img/' + item.techName[1] + '.png">' +
 					  '</li>'+
-					  '<li>'+'<h5>' + item.techName[0] + item.techName[1] + '<h5>' + '</li>' +
-					  '<li>' + item.date[0] + item.date[1] + '</li>' +
-					  '<li>' + item.inboxCheck1[0] + item.inboxCheck1[1] + '</li>' +
-					  '<li>' + item.inboxCheck2[0] + item.inboxCheck2[1] + '</li>' +
-					  '<li>' + item.reportCheck[0] + item.reportCheck[1] + '</li>' +
-					  '<li>' + item.notes[0] + item.notes[1] + '</li>' +
-					  '<li>' + '<a href="#" class="deleteLog" data-key="' + item.key + '" data-role="button" data-mini="true" data-inline="true" data-icon="delete" data-theme="b">Delete</a>' + '</li>' +
-					  '<li>' + '<a href="#trackDuty" class="editLog" data-key="' + item.key + '" data-role="button" data-transition="slide" data-mini="true" data-inline="true" data-icon="edit" data-theme="b">Edit</a>' + '</li>' +
+					  '<li>'+  
+						  '<h6>' + item.inboxCheck1[0] + item.inboxCheck1[1] + '</h6>' +
+						  '<h6>' + item.inboxCheck2[0] + item.inboxCheck2[1] + '</h6>' +
+						  '<h6>' + item.reportCheck[0] + item.reportCheck[1] + '</h6>' +
+						  '<h6>' + item.notes[0] + item.notes[1] + '</h6>' +
+					  '</li>' +
+					   '<a href="#" class="deleteLog" data-key="' + item.key + '" data-role="button" data-mini="true" data-inline="true" data-icon="delete" data-theme="b">Delete</a>' +
+					   '<a href="#trackDuty" class="editLog" data-key="' + item.key + '" data-role="button" data-transition="slide" data-mini="true" data-inline="true" data-icon="edit" data-theme="b">Edit</a>' +
 					'</ul>' + 
 				   '</li>'
-					).appendTo(dataView);
-					
-					
+					).appendTo(dataView);					
 		};
 		
 		
 	};
 
-  $("#dataView").listview("refresh");
 
- 
-//*************************************
-//*************************************
-//  ui-btn ui-shadow ui-btn-corner-all ui-mini ui-btn-inline ui-btn-icon-left ui-btn-up-b
+//-------------------------------------------------------------------------
+
+
+$("#dataView").listview("refresh");
+
+
+//-------------------------------------------------------------------------
 
  	
 $(".editLog").on("click", function(id) {	
@@ -225,9 +273,13 @@ $(".editLog").on("click", function(id) {
 
 });
 
+ 
+//-------------------------------------------------------------------------
+ 
  	
 $(".deleteLog").on("click", function(){
-	console.log($(this).data("key") , ' <-- If this is a number, this this is working');
+	//Delete item from localStorage
+	console.log($(this).data("key") , ' <-- If this is a number, this is working');
 	var ask = confirm("Delete log?");
 		if(ask) {
 		 	localStorage.removeItem($(this).data("key"));
@@ -235,7 +287,8 @@ $(".deleteLog").on("click", function(){
 		 	 if(localStorage.length === 0) {
 			 	 $.mobile.changePage("#home", { transition: "slide" });
 		 	 } else {
-			 	$.mobile.changePage("#logs", { transition: "slide" });
+		 	 	window.location.reload();
+			 	
 
 		 	 }
 	 	} else {
@@ -243,8 +296,12 @@ $(".deleteLog").on("click", function(){
 	 	}
  	});
  	
- 	//Clears local storage
+
+//-------------------------------------------------------------------------
+ 	
+ 	
  	function clearLocal() {
+ 	//Clears local storage
  		if(localStorage.length === 0) {
 	 		alert("There is nothing to clear!");
  		}else{
@@ -256,6 +313,12 @@ $(".deleteLog").on("click", function(){
  	 }
 
 
+
+//-------------------------------------------------------------------------
+
+
+
+//End of emailData Pageinit
 });
 
 
