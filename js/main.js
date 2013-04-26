@@ -196,6 +196,7 @@ var key;
 
 
 $("#emailData").on('pageinit', function(){
+	
 	//Retreives data from local storage
 	if(localStorage.length === 0) {
 		/* autoFillData(); */
@@ -233,6 +234,7 @@ $("#emailData").on('pageinit', function(){
 	};
 
 
+
 //-------------------------------------------------------------------------
 
 
@@ -242,24 +244,21 @@ $("#dataView").listview("refresh");
 //-------------------------------------------------------------------------
 
  	
-$(".editLog").on("click", function(id) {	
+$(".editLog").on("click", function() {	
 	//Grab the data for our items in Local Storage
-	var value = localStorage.getItem(id);
+	var key = $(this).data("key");
+	var value = localStorage.getItem(key);
 	var item = JSON.parse(value);
 	
+	console.log(item);
 	
 	//Populate the form fields with current localStorage values.
 	$("#techName").val(item.techName[1]);
 	$("#date").val(item.date[1]);
-	$("#inboxCheck1").val(item.inboxCheck1[1]);
-	$("#inboxCheck2").val(item.inboxCheck2[1]);
-	$("#reportCheck").val(item.inboxCheck3[1]);
-	$("#notes").val(item.notes[1]);
-	//For Check Boxes
 	
-		if(item.inboxCheck1[1] == "Completed") {
+	if(item.inboxCheck1[1] == "Completed") {
 			$("#inboxCheck1").attr("checked", "checked");
-		}
+		} 
 		
 		if(item.inboxCheck2[1] == "Completed") {
 			$("#inboxCheck2").attr("checked", "checked");
@@ -268,6 +267,11 @@ $(".editLog").on("click", function(id) {
 		if(item.reportCheck[1] == "Completed") {
 			$("#reportCheck").attr("checked", "checked");
 		}
+	
+	$("#notes").val(item.notes[1]);
+	//For Check Boxes
+	
+		
 		
 	
 
@@ -283,6 +287,7 @@ $(".deleteLog").on("click", function(){
 	var ask = confirm("Delete log?");
 		if(ask) {
 		 	localStorage.removeItem($(this).data("key"));
+		 	 window.location.reload();
 		 	 //need an if else statement that will check to see if localstorage exists. If it does it will stay on the page. If not it will need to return to the home page.
 		 	 if(localStorage.length === 0) {
 			 	 $.mobile.changePage("#home", { transition: "slide" });
