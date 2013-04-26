@@ -65,10 +65,12 @@ $("#mainForm").each(function(){
 //Will need to work out an if else statement to determine if there is a key or not.
 	});
 	
-/* $("#mainForm").reset(); */
+
+//-------------------------------------------------------------------------	
 	
 
-	/*
+	
+/*
  $.ajax({
 		 type: 'GET',
 		 url: 'json.js',
@@ -86,6 +88,7 @@ $("#mainForm").each(function(){
 						 }
 });
 */
+
 
 	
 	
@@ -260,9 +263,10 @@ $(".editLog").on("click", function() {
 	
 	//Populate the form fields with current localStorage values.
 	$("#techName").val(item.techName[1]);
-	$("#date").val(item.date[1]);
-		//For Check Boxes
-		if(item.inboxCheck1[1] == "Completed") {
+	$("#date").val(item.date[1]);	
+	$("#notes").val(item.notes[1]);
+	 //For Check Boxes
+	 if(item.inboxCheck1[1] == "Completed") {
 				$("#inboxCheck1").attr("checked", "checked");
 			} 
 			
@@ -273,10 +277,13 @@ $(".editLog").on("click", function() {
 			if(item.reportCheck[1] == "Completed") {
 				$("#reportCheck").attr("checked", "checked");
 			}
-	
-	$("#notes").val(item.notes[1]);
-	
-	
+
+	console.log(item.techName[1]);
+	console.log(item.date[1]);
+	console.log(item.notes[1]);
+	console.log($("#techName").val());
+	console.log($("#date").val());
+	console.log($("#notes").val());
 		
 		
 	
@@ -293,15 +300,13 @@ $(".deleteLog").on("click", function(){
 	var ask = confirm("Delete log?");
 		if(ask) {
 		 	localStorage.removeItem($(this).data("key"));
-		 	 window.location.reload();
+		 	  $.mobile.changePage("#emailData", { transition: "slide" });
 		 	 //need an if else statement that will check to see if localstorage exists. If it does it will stay on the page. If not it will need to return to the home page.
 		 	 if(localStorage.length === 0) {
 			 	 $.mobile.changePage("#home", { transition: "slide" });
-		 	 } else {
-     	 	 	  $.mobile.changePage("#emailData", { transition: "slide" });
-			 	
-
 		 	 }
+
+		 	 
 	 	} else {
 		 	alert("Whew, that was close!");
 	 	}
