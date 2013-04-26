@@ -199,7 +199,7 @@ var key;
 
 
 
-$("#emailData").on('pageinit', function(){
+$("#emailData").on('pagebeforeshow', function(){
 
 
 	//Retreives data from local storage
@@ -208,7 +208,7 @@ $("#emailData").on('pageinit', function(){
 		alert("Nothing has been saved yet so default data has been added.");
 		 $.mobile.changePage("#trackDuty", { transition: "slide" });
 		}else{
-		/* $("#dataView").empty(); */
+		$("#dataView").empty();
 				
 		for(var i=0, j=localStorage.length; i<j; i++) {
 		//Write data from localStorage to the Browser
@@ -311,17 +311,17 @@ $(".deleteLog").on("click", function(){
 //-------------------------------------------------------------------------
  	
  	
- 	function clearLocal() {
+ $("#clearLocal").on("click", function(){
  	//Clears local storage
  		if(localStorage.length === 0) {
 	 		alert("There is nothing to clear!");
  		}else{
 	 		localStorage.clear();
 	 		alert("All logs have been deleted.");
-	 		window.location.reload();
+	 		$.mobile.changePage("#home", { transition: "slide" });
 	 		return false;
  		}
- 	 }
+ 	 });
 
 
 
