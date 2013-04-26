@@ -1,5 +1,5 @@
 function(doc) {
-  if (doc.created_at) {
-    emit(doc.created_at, doc);
+  if (doc._id.substr(0,2) === "Jon") {
+    emit(doc._id);
   }
 };
