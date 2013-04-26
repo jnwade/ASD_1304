@@ -42,6 +42,9 @@ $("#dataView").empty();
 $('#trackDuty').on('pageinit', function(){
 //code needed for trackDuty page goes here
 
+$("#mainForm").each(function(){
+	this.reset();
+});
 
 //-------------------------------------------------------------------------	
 
@@ -52,6 +55,7 @@ $('#trackDuty').on('pageinit', function(){
 		},
 		submitHandler: function() {
 		var data = myForm.serializeArray();
+		
 		storeData(data);
 		$("#mainForm").each(function(){
 			this.reset();
@@ -196,14 +200,15 @@ var key;
 
 
 $("#emailData").on('pageinit', function(){
-	
+
+
 	//Retreives data from local storage
 	if(localStorage.length === 0) {
 		/* autoFillData(); */
 		alert("Nothing has been saved yet so default data has been added.");
 		 $.mobile.changePage("#trackDuty", { transition: "slide" });
 		}else{
-		$("#dataView").empty();
+		/* $("#dataView").empty(); */
 				
 		for(var i=0, j=localStorage.length; i<j; i++) {
 		//Write data from localStorage to the Browser
@@ -241,6 +246,7 @@ $("#emailData").on('pageinit', function(){
 $("#dataView").listview("refresh");
 
 
+
 //-------------------------------------------------------------------------
 
  	
@@ -255,21 +261,21 @@ $(".editLog").on("click", function() {
 	//Populate the form fields with current localStorage values.
 	$("#techName").val(item.techName[1]);
 	$("#date").val(item.date[1]);
-	
-	if(item.inboxCheck1[1] == "Completed") {
-			$("#inboxCheck1").attr("checked", "checked");
-		} 
-		
-		if(item.inboxCheck2[1] == "Completed") {
-			$("#inboxCheck2").attr("checked", "checked");
-		}
-		
-		if(item.reportCheck[1] == "Completed") {
-			$("#reportCheck").attr("checked", "checked");
-		}
+		//For Check Boxes
+		if(item.inboxCheck1[1] == "Completed") {
+				$("#inboxCheck1").attr("checked", "checked");
+			} 
+			
+			if(item.inboxCheck2[1] == "Completed") {
+				$("#inboxCheck2").attr("checked", "checked");
+			}
+			
+			if(item.reportCheck[1] == "Completed") {
+				$("#reportCheck").attr("checked", "checked");
+			}
 	
 	$("#notes").val(item.notes[1]);
-	//For Check Boxes
+	
 	
 		
 		
@@ -292,7 +298,7 @@ $(".deleteLog").on("click", function(){
 		 	 if(localStorage.length === 0) {
 			 	 $.mobile.changePage("#home", { transition: "slide" });
 		 	 } else {
-		 	 	window.location.reload();
+     	 	 	  $.mobile.changePage("#emailData", { transition: "slide" });
 			 	
 
 		 	 }
