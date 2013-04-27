@@ -3,17 +3,36 @@
 	// Full Sail University
 	// Jonathan Wade
 
-		
+		//127.0.0.1:5984/dutytracker/_all_docs?include_docs=true&start_key="Jon"
 
-var json = {
-	"Log1": {
-		"techName": ["Tech:", "Jon"],
-		"date": ["Date:", "12/13/2013"],
-		"inboxCheck1":["Inbox Check 1:", "The Bee-Gees"],
-		"inboxCheck2":["Inbox Check 2:", "Complete"],
-		"reportCheck": ["Report Check:", "Incomplete"]
-		"notes": ["Notes:", "These are some notes"]
-	},
+{
+		"_id":
+		"techName": [
+			"Tech:",
+			"Jon"
+		],
+		"date": [
+			"Date:", 
+			"12/13/2013"
+		],
+		"inboxCheck1":[
+			"Inbox Check 1:", 
+			"incomplete"
+		],
+		"inboxCheck2":[ 
+			"Inbox Check 2:", 
+			"Complete"
+		],
+		"reportCheck": [
+			"Report Check:", 
+			"Incomplete"
+		],
+		"notes": [
+			"Notes:", 
+			"These are some notes"
+		]
+		 
+	}
 	"log2": {
 		"techName": ["Tech:", "Jon"],
 		"date": ["Date:", "12/13/2013"],
