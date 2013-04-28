@@ -10,23 +10,33 @@
 
 
 
-$('#home').on('pageinit', function(){
-//code needed for home page goes here
+$("#homePage").on("pagebeforeshow", function(){
 
+console.log("initialized");
 
-$(".saveButton").css("display", "block");
 $(".editButton").css("display", "none");
+$(".saveButton").css("display", "block");
+
+console.log("Edit and Save buttons swapped");
+
+	$("#mainForm").each(function(){
+	        this.reset();
+	        
+	        console.log("Form fields reset");
+	});   
+	
 
 
-$("#mainForm").each(function(){
-	this.reset();
-});
+
+
+
 
 //-------------------------------------------------------------------------
 
 
 $("#dataView").empty();
-		
+
+
 
 //End of home Pageinit
 });	
@@ -39,66 +49,26 @@ $("#dataView").empty();
 //*************************************************************************
 
 		
-$('#trackDuty').on('pageinit', function(){
+$("#trackDuty").on("pageinit", function(){
 //code needed for trackDuty page goes here
 
 
 
+
+
+
+
 //-------------------------------------------------------------------------	
 
 
-	/*
-var myForm = $("#mainForm");
-	    myForm.validate({
-		invalidHandler: function(form, validator) {
-		},
-		submitHandler: function() {
 
-var data = myForm.serializeArray();
-		
-		storeData(data);
-		$("#mainForm").each(function(){
-			this.reset();
-		});
-
-		}
-		
-//Will need to work out an if else statement to determine if there is a key or not.
-	});
-*/
-	
-
-//-------------------------------------------------------------------------	
-	
-
-	
-/*
- $.ajax({
-		 type: 'GET',
-		 url: 'json.js',
-		 data: { },
-			 success:function(data){
-				 // successful request; do something with the data
-				 $('#ajax-panel').empty();
-				 $(data).find('item').each(function(i){
-					 $('#ajax-panel').append('<h1>Error</h1>');
-					 });
-					 },
-					 error:function(){
-						 // failed request; give feedback to user
-						 $('#ajax-panel').html('<p class="error">No Go!</p>');
-						 }
-});
-*/
 
 
 	
 	
 //-------------------------------------------------------------------------
 	
-	
-// Global Variables 
-/* var	id; */
+
 		
 
 //-------------------------------------------------------------------------
@@ -152,23 +122,21 @@ function getCheckValue3(){
 $(".saveButton").on("click", function(data){
 //Stores form data into Local Storage
 
-//If there is no key, this means this is a brand new item and we need a new key
 
-	var key;
+	var key,
+		id;
 	
-	if(!key){
-		 	
+	if(!key) {
+	
 		id = Math.floor(Math.random()*1000001);
-	
-	}else{
 		
-		id = key;
+		} else {
+			
+			id = key;
+		}
 	
-	}
-	
-
-	
-	console.log("data",data );
+	console.log(data);
+	console.log(id);
 	
 	var item 				= {};
 		item.techName		= ["Tech Name: ", $("#techName").val()];
@@ -179,11 +147,11 @@ $(".saveButton").on("click", function(data){
 		item.notes			= ["Notes: ", $("#notes").val()];
 		item.key = id;
 	//Saving object to local storage
-	localStorage.setItem(id, JSON.stringify(item));
+	localStorage.setItem(id, JSON.stringify(item));	
 	alert("Log Saved");
 	//activating a transition back to the home page to start over once submission is complete
-	$.mobile.changePage("#home", { transition: "slide" });
-	console.log(item);		
+	/* $.mobile.changePage("#homePage", { transition: "slide" }); */
+	
 });
 
 
@@ -204,14 +172,14 @@ $(".saveButton").on("click", function(data){
 
 $("#emailData").on('pagebeforeshow', function(){
 
-
+	$("#dataView").empty();
 	//Retreives data from local storage
 	if(localStorage.length === 0) {
 		/* autoFillData(); */
 		alert("Nothing has been saved yet!");
 		 /* $.mobile.changePage("#trackDuty", { transition: "slide" }); */
 		}else{
-		$("#dataView").empty();
+		
 				
 		for(var i=0, j=localStorage.length; i<j; i++) {
 		//Write data from localStorage to the Browser
@@ -257,33 +225,46 @@ $(".editLog").on("click", function() {
     
 	$(".saveButton").css("display", "none");
 	$(".editButton").css("display", "block");
+
 	
 	//Grab the data for our items in Local Storage
 	var key = $(this).data("key");
 	var value = localStorage.getItem(key);
 	var item = JSON.parse(value);
 	
-	console.log(key, value, item);
+
 	
 	//Populate the form fields with current localStorage values.
-	var techname = $("#techName").val(item.techName[1]);
-	var date = $("#date").val(item.date[1]);	
-	var notes = $("#notes").val(item.notes[1]);
-	 //For Check Boxes
-	 if(item.inboxCheck1[1] == "Completed") {
-		$("#inboxCheck1").attr("checked", "checked");
-	} 
+	$("#techName").val(item.techName[1]);
+	$("#date").val(item.date[1]);	
+	$("#notes").val(item.notes[1]);
 	
-	 if(item.inboxCheck2[1] == "Completed") {
-		$("#inboxCheck2").attr("checked", "checked");
-	}
+ //For Check Boxes
+//-------------------------------------------------------------------------
+		
+		//Find Value of Checkbox 1
+		if (item.inboxCheck1[1] === "Complete"){
+			$("#inboxCheck1").val(":checked");
+		}	
+//-------------------------------------------------------------------------
+
+		//Find Value of Checkbox 2
+		if (item.inboxCheck2[1] === "Complete"){
+			$("#inboxCheck2").val(":checked");
+		}
+
+//-------------------------------------------------------------------------
+
+		//Find Value of Checkbox 2
+		if(item.reportCheck[1] === "Complete"){
+			$("#reportCheck").val(":checked");
+		}
 	
-	 if(item.reportCheck[1] == "Completed") {
-		$("#reportCheck").attr("checked", "checked");
-	}
+//-------------------------------------------------------------------------
 		
 			
 $(".editButton").on("click", function(){
+
 
 		var Key = $(this).data("key");	
 		var check1;
@@ -297,8 +278,8 @@ $(".editButton").on("click", function(){
 			check1 = "Complete";
 		} else{
 			check1 = "Incomplete";
-		}
-					
+		};
+			
 //-------------------------------------------------------------------------
 
 		//Find Value of Checkbox 2
@@ -306,8 +287,8 @@ $(".editButton").on("click", function(){
 			check2 = "Complete";
 		} else{
 			check2 = "Incomplete";
-		}
-			
+		};
+		
 //-------------------------------------------------------------------------
 
 		//Find Value of Checkbox 2
@@ -315,12 +296,11 @@ $(".editButton").on("click", function(){
 			check3 = "Complete";
 		} else{
 			check3 = "Incomplete";
-		}
-			
+		};
+		
 //-------------------------------------------------------------------------
 			
-	/*
-var item 				= {};
+	var item 				= {};
 		item.techName		= ["Tech Name: ", $("#techName").val()];
 		item.date			= ["Date: ", $("#date").val()];
 		item.inboxCheck1	= ["Inbox Check 1: ", check1];
@@ -328,17 +308,22 @@ var item 				= {};
 		item.reportCheck	= ["Report Check: ", check3];
 		item.notes			= ["Notes: ", $("#notes").val()];
 		item.key = key;
-*/
 			
 	//Saving object to local storage
-	localStorage.setItem(key, JSON.stringify(item));	
+	localStorage.setItem(key, JSON.stringify(item));
+	
+	
+	$(".editButton").css("display", "none");
+	$(".saveButton").css("display", "block");
+	
 	 alert("Log Updated");
-	 $.mobile.changePage("#home", { transition: "slide" });
+	 
+	 $.mobile.changePage("#homePage", { transition: "slide" });
 	 
 		
 	});		
 
-	
+
 		         
 
 });
@@ -354,12 +339,7 @@ $(".deleteLog").on("click", function(){
 		if(ask) {
 		 	localStorage.removeItem($(this).data("key"));
 		 	  $.mobile.changePage("#emailData", { transition: "slide" });
-		 	 //need an if else statement that will check to see if localstorage exists. If it does it will stay on the page. If not it will need to return to the home page.
-		 	 if(localStorage.length === 0) {
-			 	 $.mobile.changePage("#home", { transition: "slide" });
-		 	 }
-
-		 	 
+	 
 	 	} else {
 		 	alert("Whew, that was close!");
 	 	}
@@ -376,14 +356,15 @@ $(".deleteLog").on("click", function(){
  		}else{
 	 		localStorage.clear();
 	 		alert("All logs have been deleted.");
-	 		$.mobile.changePage("#home", { transition: "slide" });
-	 		return false;
+	 		$.mobile.changePage("#homePage", { transition: "slide" });
+	 		
  		}
  	 });
 
 
 
 //-------------------------------------------------------------------------
+
 
 
 

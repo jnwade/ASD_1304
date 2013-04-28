@@ -27,7 +27,7 @@
 <body>
 		<!--Home Page-->
 	
-	<div data-role="page" id="home" data-theme="a">
+	<div data-role="page" class="homePage" id="homePage" data-theme="a">
 	
 		
 		<section data-role="content">
@@ -35,7 +35,7 @@
 				<a href="#trackDuty" data-transition="slide" class="centered"><img src="img/logo.png" alt="Track Duties"/></a>
 			</div>
 		    
-			<a href="#trackDuty" class="homeButtons" data-role="button" data-inline="false" data-icon="arrow-r" data-iconpos="right"  data-transition="slide" data-theme="a">Email</a>		
+			<a href="#trackDuty" id="viewForm" class="homeButtons" data-role="button" data-inline="false" data-icon="arrow-r" data-iconpos="right"  data-transition="slide" data-theme="a">Email</a>		
 			
 			<a href="#" class="homeButtons" data-role="button" data-inline="false" data-icon="arrow-r" data-iconpos="right" data-transition="slide" data-theme="a">ES (Disabled)</a>
 			
@@ -49,7 +49,7 @@
 	<div data-role="page" id="trackDuty" data-theme="a">
 	
 		<header id="header" data-role="header" data-position="fixed" data-theme="a">
-			<a href="#home" data-rel="back" data-icon="back" data-transition="flow">Back</a>
+			<a href="#homePage" data-rel="back" data-icon="back" data-transition="flow">Back</a>
 			<h1> </h1>
 			<a href="#logs" data-icon="bars" class="ui-btn-right" data-transition="flow">Logs</a>
 		</header>
@@ -65,7 +65,7 @@
 				
 				<div data-role="fieldcontain">
 				   <select name="techName" id="techName" data-native-menu="false" class="required">
-				      <option data-placeholder="true">Tech</option>
+				      <option value="Tech" data-placeholder="true">Tech</option>
 				      <option value="Jon">Jon</option>
 				      <option value="Mike">Mike</option>
 				      <option value="Tabitha">Tabitha</option>
@@ -78,7 +78,7 @@
 				</div><!--Close Fieldset -->
 				
 			<div data-role="fieldcontain">	
-				<input name="date" id="date" placeholder="Date" value="" type="date" class="required">
+				<input name="date" id="date" placeholder="Date" type="date" class="required">
 			</div>
 					
 	
@@ -90,7 +90,7 @@
         	 			
 				
 			<div data-role="fieldcontain">
-				<textarea name="textarea" id="notes" value="notes" placeholder="Notes..."></textarea>
+				<textarea name="textarea" id="notes" placeholder="Notes..."></textarea>
 			</div>
 	
 			<nav class="formButtons" data-role="navbar">
@@ -112,9 +112,9 @@
 	<div data-role="page" id="logs" data-theme="a" class="type-interior">
 	
 		<header data-role="header" data-position="fixed" data-theme="a">
-			<a href="#home" data-rel="back" data-icon="back" data-transition="flow">Back</a>
+			<a href="#homePage" data-rel="back" data-icon="back" data-transition="flow">Back</a>
 			<h1> </h1>
-			<a href="#home" data-icon="home" class="ui-btn-right" data-transition="flow">Home</a>
+			<a href="#homePage" data-icon="home" class="ui-btn-right" data-transition="flow">Home</a>
 		</header>
 		
 		<div data-role="content">
@@ -143,9 +143,9 @@
 	<div data-role="page" id="emailData" data-theme="a" class="type-interior">
 	
 		<header data-role="header" data-position="fixed" data-theme="a">
-			<a href="#home" data-rel="back" data-icon="back" data-transition="flow">Back</a>
+			<a href="#homePage" data-rel="back" data-icon="back" data-transition="flow">Back</a>
 				<h1></h1>
-			<a href="#home" data-icon="home" class="ui-btn-right" data-transition="flow">Home</a>
+			<a href="#homePage" data-icon="home" class="ui-btn-right" data-transition="flow">Home</a>
 		</header>
 		
 		<div data-role="content">
