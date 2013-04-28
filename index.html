@@ -9,17 +9,10 @@
 		
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-		<!--
-		<link rel="stylesheet" href="css/jquery.mobile-1.3.0.min.css" type="text/css" media="screen" />
-		<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" />
-		<script src="js/jquery.mobile-1.3.0.min.js" type="text/javascript"></script>
-		<script src="jquery-1.9.1.js" type="text/javascript"></script>
-		<script src="js/libs/modernizr.custom.min.js"></script>
-		-->
-		
-
+	
 		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
 		<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" />
+		<script src="js/libs/modernizr.custom.min.js"></script>
 		
 	
 	</head>
@@ -27,7 +20,7 @@
 <body>
 		<!--Home Page-->
 	
-	<div data-role="page" id="home" data-theme="a">
+	<div data-role="page" class="homePage" id="homePage" data-theme="a">
 	
 		
 		<section data-role="content">
@@ -35,7 +28,7 @@
 				<a href="#trackDuty" data-transition="slide" class="centered"><img src="img/logo.png" alt="Track Duties"/></a>
 			</div>
 		    
-			<a href="#trackDuty" class="homeButtons" data-role="button" data-inline="false" data-icon="arrow-r" data-iconpos="right"  data-transition="slide" data-theme="a">Email</a>		
+			<a href="#trackDuty" id="viewForm" class="homeButtons" data-role="button" data-inline="false" data-icon="arrow-r" data-iconpos="right"  data-transition="slide" data-theme="a">Email</a>		
 			
 			<a href="#" class="homeButtons" data-role="button" data-inline="false" data-icon="arrow-r" data-iconpos="right" data-transition="slide" data-theme="a">ES (Disabled)</a>
 			
@@ -49,9 +42,9 @@
 	<div data-role="page" id="trackDuty" data-theme="a">
 	
 		<header id="header" data-role="header" data-position="fixed" data-theme="a">
-			<a href="#home" data-rel="back" data-icon="back" data-transition="flow">Back</a>
+			<a href="#homePage" data-rel="back" data-icon="back" data-transition="flip">Back</a>
 			<h1> </h1>
-			<a href="#logs" data-icon="bars" class="ui-btn-right" data-transition="flow">Logs</a>
+			<a href="#logs" data-icon="bars" class="ui-btn-right" class="formReset" data-transition="flip">Logs</a>
 		</header>
 		
 		<section data-role="content">
@@ -64,8 +57,8 @@
 			
 				
 				<div data-role="fieldcontain">
-				   <select name="techName" id="techName" data-native-menu="false">
-				      <option data-placeholder="true">Tech:</option>
+				   <select name="techName" id="techName" data-native-menu="false" class="required">
+				      <option value="Tech" data-placeholder="true">Tech</option>
 				      <option value="Jon">Jon</option>
 				      <option value="Mike">Mike</option>
 				      <option value="Tabitha">Tabitha</option>
@@ -78,15 +71,15 @@
 				</div><!--Close Fieldset -->
 				
 			<div data-role="fieldcontain">	
-				<input name="date" id="date" placeholder="Date" value="" type="date">
+				<input name="date" id="date" placeholder="Date" type="date" class="required">
 			</div>
 					
 	
-			<label><input id="inboxCheck1" name="inboxCheck1" type="checkbox">Inbox - 11am Check</label>
+			<label><input id="inboxCheck1" name="dutyCheck" type="checkbox" >Inbox - 11am Check</label>
         	 
-	        <label><input id="inboxCheck2" name="inboxCheck2" type="checkbox">Inbox - 3pm Check</label>
+	        <label><input id="inboxCheck2" name="dutyCheck" type="checkbox" >Inbox - 3pm Check</label>
         	 
-        	<label><input id="reportCheck" name="reportCheck" type="checkbox">Daily Report</label>
+        	<label><input id="reportCheck" name="dutyCheck" type="checkbox" >Daily Report</label>
         	 			
 				
 			<div data-role="fieldcontain">
@@ -95,6 +88,7 @@
 	
 			<nav class="formButtons" data-role="navbar">
 				<ul>
+					<li class="editButton" style="display: none;"><input type="submit" id="editButton" value="Edit" data-icon="edit" data-theme="a"></li>
 					<li class="saveButton"><input type="submit" value="Save" id="submitButton"  data-icon="plus" data-theme="a"></li>
 					<li class="clearButton"><input type="reset" value="Reset" id="resetButton" data-icon="minus"></li>
 				</ul>
@@ -103,6 +97,7 @@
 		
 		
 	</div>
+ </section>
 </div>
 
 	<!-- LogSelect page -->
@@ -110,9 +105,9 @@
 	<div data-role="page" id="logs" data-theme="a" class="type-interior">
 	
 		<header data-role="header" data-position="fixed" data-theme="a">
-			<a href="#home" data-rel="back" data-icon="back" data-transition="flow">Back</a>
+			<a href="#homePage" data-rel="back" data-icon="back" data-transition="flip">Back</a>
 			<h1> </h1>
-			<a href="#home" data-icon="home" class="ui-btn-right" data-transition="flow">Home</a>
+			<a href="#homePage" data-icon="home" class="ui-btn-right" data-transition="flip">Home</a>
 		</header>
 		
 		<div data-role="content">
@@ -141,15 +136,16 @@
 	<div data-role="page" id="emailData" data-theme="a" class="type-interior">
 	
 		<header data-role="header" data-position="fixed" data-theme="a">
-			<a href="#home" data-rel="back" data-icon="back" data-transition="flow">Back</a>
+			<a href="#homePage" data-rel="back" data-icon="back" data-transition="flip">Back</a>
 				<h1></h1>
-			<a href="#home" data-icon="home" class="ui-btn-right" data-transition="flow">Home</a>
+			<a href="#homePage" data-icon="home" class="ui-btn-right" data-transition="flip">Home</a>
 		</header>
 		
 		<div data-role="content">
-			<div id="dataView">
+			<ul id="dataView" data-role="listview">
 				
-		    </div>
+				
+		    </ul>
 		   		    
 
 
@@ -157,7 +153,8 @@
 			
 	
 				<footer data-role="footer" data-position="fixed" data-theme="a">
-				  <h1> </h1>
+				  <h1></h1>
+				  <a href="#" id="clearLocal" data-icon="delete" class="ui-btn-right" data-transition="flow">Clear Logs</a>
 				</footer>
 			</div>
 		</div>
