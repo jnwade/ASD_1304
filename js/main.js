@@ -4,10 +4,6 @@
 //*************************************************************************
 //*************************************************************************
 //*************************************************************************
-
-
-
-
 $("#homePage").on("pagebeforeshow", function () {
 
     console.log("initialized");
@@ -143,14 +139,14 @@ $("#trackDuty").on("pageinit", function () {
         localStorage.setItem(id, JSON.stringify(item));
         alert("Log Saved");
         //activating a transition back to the home page to start over once submission is complete
-       
+
         $.mobile.changePage("#homePage", {
-                transition: "slidefade"
-            });
-       
-       location.reload();
-       
-      
+            transition: "slidefade"
+        });
+
+        location.reload();
+
+
 
     });
 
@@ -269,9 +265,9 @@ $("#emailData").on('pagebeforeshow', function () {
 
 
             var Key,
-             	check1,
-             	check2,
-             	check3;
+                check1,
+                check2,
+                check3;
 
             //-------------------------------------------------------------------------
 
@@ -322,13 +318,13 @@ $("#emailData").on('pagebeforeshow', function () {
             $.mobile.changePage("#homePage", {
                 transition: "slidefade"
             });
-            
+
             location.reload();
 
 
         });
 
-       
+
 
     });
 
