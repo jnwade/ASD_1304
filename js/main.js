@@ -5,6 +5,7 @@
 //*************************************************************************
 //*************************************************************************
 
+
 $("#homePage").on("pagebeforeshow", function () {
 
     console.log("initialized");
@@ -150,14 +151,14 @@ $("#trackDuty").on("pageinit", function () {
 
 
 
-       
+
         $.mobile.changePage("#homePage", {
-                transition: "slidefade"
-            });
-       
-       location.reload();
-       
-      
+            transition: "slidefade"
+        });
+
+        location.reload();
+
+
 
 
     });
@@ -334,7 +335,7 @@ $("#emailData").on('pagebeforeshow', function () {
             });
 
 
-            
+
 
             location.reload();
 
