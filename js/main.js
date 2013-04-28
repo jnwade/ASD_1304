@@ -4,13 +4,7 @@
 //*************************************************************************
 //*************************************************************************
 //*************************************************************************
-<<<<<<< HEAD
-=======
 
-
-
-
->>>>>>> origin/gh-pages
 $("#homePage").on("pagebeforeshow", function () {
 
     console.log("initialized");
@@ -146,7 +140,7 @@ $("#trackDuty").on("pageinit", function () {
         localStorage.setItem(id, JSON.stringify(item));
         alert("Log Saved");
         //activating a transition back to the home page to start over once submission is complete
-<<<<<<< HEAD
+
 
         $.mobile.changePage("#homePage", {
             transition: "slidefade"
@@ -155,7 +149,7 @@ $("#trackDuty").on("pageinit", function () {
         location.reload();
 
 
-=======
+
        
         $.mobile.changePage("#homePage", {
                 transition: "slidefade"
@@ -164,7 +158,7 @@ $("#trackDuty").on("pageinit", function () {
        location.reload();
        
       
->>>>>>> origin/gh-pages
+
 
     });
 
@@ -283,15 +277,11 @@ $("#emailData").on('pagebeforeshow', function () {
 
 
             var Key,
-<<<<<<< HEAD
+
                 check1,
                 check2,
                 check3;
-=======
-             	check1,
-             	check2,
-             	check3;
->>>>>>> origin/gh-pages
+
 
             //-------------------------------------------------------------------------
 
@@ -342,21 +332,15 @@ $("#emailData").on('pagebeforeshow', function () {
             $.mobile.changePage("#homePage", {
                 transition: "slidefade"
             });
-<<<<<<< HEAD
 
-=======
+
             
->>>>>>> origin/gh-pages
+
             location.reload();
 
 
         });
 
-<<<<<<< HEAD
-
-=======
-       
->>>>>>> origin/gh-pages
 
     });
 
