@@ -59,6 +59,27 @@ p {
 	
 }
 
+.instruction h3 {
+	text-align: center;
+}
+
+.instruction p {
+	text-align: center;
+	line-height: 20px;
+}
+
+.ajaxButtons {
+	position: relative;
+	left: 10%;
+}
+
+.ajaxError {
+	text-align: center;
+	color: #2f3e46;
+	font-size: x-large;
+	margin-top: 50%;
+}
+
 .ui-li-thumb {
 	margin-top: 1px;
 	margin-left: 11px;
