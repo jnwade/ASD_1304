@@ -30,6 +30,113 @@ $("#homePage").on("pagebeforeshow", function () {
     //-------------------------------------------------------------------------
 
 
+/*
+Options:
+url - string - request url address
+type - string - GET or POST?
+data - Object - Key : Value pairs
+dataType - string - expected data to be returned: xml, html, text, json, script, jsonp
+timeout - number - milliseconds to wait before cancel. Evokes error call back
+cache - boolean - Default is true (Caches requests by default unless you use false)
+beforeSend - function - evokes before ajax is sent
+error - function - evokes on error timeout
+success - function evokes on successful ajax
+complete - function - always evokes after a retrun
+*/
+
+
+$(".jsonDisplay").on("click", function(){
+       
+
+$("#jsonView").empty();
+$.ajax({
+	url: "xhr/data.js",
+	type: "GET",
+	dataType: "json",
+	 success:function(response){
+	 	console.log(response);
+		 // successful request; do something with the data
+		for(var i = 0, j = response.json.length; i < j; i++){
+			var item = response.json[i];
+			$('<li class="itemView">' +
+                '<h6>' + item.techName[1] + " :: " + item.date[1] + '</h6>' +
+                '<ul class="bodyText">' +
+                '<li id="imgAvatar">' +
+                '<img src="img/' + item.techName[1] + '.png">' +
+                '</li>' +
+                '<li>' +
+                '<h6>' + item.inboxCheck1[0] + item.inboxCheck1[1] + '</h6>' +
+                '<h6>' + item.inboxCheck2[0] + item.inboxCheck2[1] + '</h6>' +
+                '<h6>' + item.reportCheck[0] + item.reportCheck[1] + '</h6>' +
+                '<h6>' + item.notes[0] + item.notes[1] + '</h6>' +
+                '</li>' +
+                '<a href="#" class="deleteLog" data-key="' + item.key + '" data-role="button" data-mini="true" data-inline="true" data-icon="delete" data-theme="b">Delete</a>' +
+                '<a href="#trackDuty" class="editLog" data-key="' + item.key + '" data-role="button" data-transition="slide" data-mini="true" data-inline="true" data-icon="edit" data-theme="b">Edit</a>' +
+                '</ul>' +
+                '</li>').appendTo("#jsonView");
+		};
+		
+		
+	},
+		 error:function(){
+			 // failed request; give feedback to user
+			 $("#jsonView").html("<p class='ajaxError'>You Broke It!</p>");
+			 }
+});
+
+});
+
+
+  //-------------------------------------------------------------------------	
+  
+  
+$(".xmlDisplay").on("click", function(){
+       
+
+$("#xmlView").empty();
+$.ajax({
+	url: "xhr/data.xml",
+	type: "GET",
+	dataType: "xml",
+	 success:function(response){
+	 	console.log(response);
+		 // successful request; do something with the data
+		for(var i = 0, j = response.log.length; i < j; i++){
+			var item = response.log[i];
+			$('<li class="itemView">' +
+                '<h6>' + item.techName[1] + " :: " + item.date[1] + '</h6>' +
+                '<ul class="bodyText">' +
+                '<li id="imgAvatar">' +
+                '<img src="img/' + item.techName[1] + '.png">' +
+                '</li>' +
+                '<li>' +
+                '<h6>' + item.inboxCheck1[0] + item.inboxCheck1[1] + '</h6>' +
+                '<h6>' + item.inboxCheck2[0] + item.inboxCheck2[1] + '</h6>' +
+                '<h6>' + item.reportCheck[0] + item.reportCheck[1] + '</h6>' +
+                '<h6>' + item.notes[0] + item.notes[1] + '</h6>' +
+                '</li>' +
+                '<a href="#" class="deleteLog" data-key="' + item.key + '" data-role="button" data-mini="true" data-inline="true" data-icon="delete" data-theme="b">Delete</a>' +
+                '<a href="#trackDuty" class="editLog" data-key="' + item.key + '" data-role="button" data-transition="slide" data-mini="true" data-inline="true" data-icon="edit" data-theme="b">Edit</a>' +
+                '</ul>' +
+                '</li>').appendTo("#xmlView");
+		};
+		
+		
+	},
+		 error:function(){
+			 // failed request; give feedback to user
+			 $("#xmlView").html("<p class='ajaxError'>You Broke It!</p>");
+			 }
+});
+
+});
+  
+  
+  
+  
+    //-------------------------------------------------------------------------	
+
+
     //End of home Pageinit
 });
 
@@ -48,7 +155,6 @@ $("#trackDuty").on("pageinit", function () {
 
 
     //-------------------------------------------------------------------------	
-
 
 
 
