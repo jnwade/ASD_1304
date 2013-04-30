@@ -76,7 +76,7 @@ $.ajax({
                 '</li>').appendTo("#jsonView");
                 	 	
 		};
-		
+		$("#jsonView").listview('refresh');
 		
 	},
 		 error:function(){
@@ -125,7 +125,7 @@ $.ajax({
                 '<hr />' +
                 '</li>').appendTo("#xmlView");
 		});
-		
+		$("#xmlView").listview('refresh');
 			
 	},
 	

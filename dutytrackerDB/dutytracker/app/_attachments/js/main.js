@@ -65,7 +65,7 @@ $("#jsonView").empty();
                 '<h3 style="text-align: center;">' + name + " :: " + date + '</h3>' +
                 '<ul class="bodyText" style="list-style: none;">' +
                 '<li id="imgAvatar">' +
-                '<img src="img/' + name + '.png">' +
+                '<img src="' + name + '.png">' +
                 '</li>' +
                 '<li>' +
                 '<h6>Notes: ' + notes + '</h6>' +
@@ -256,7 +256,7 @@ $("#emailData").on('pagebeforeshow', function () {
                 '<h6>' + item.techName[1] + " :: " + item.date[1] + '</h6>' +
                 '<ul class="bodyText">' +
                 '<li id="imgAvatar">' +
-                '<img src="img/' + item.techName[1] + '.png">' +
+                '<img src="' + item.techName[1] + '.png">' +
                 '</li>' +
                 '<li>' +
                 '<h6>' + item.inboxCheck1[0] + item.inboxCheck1[1] + '</h6>' +
