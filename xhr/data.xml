@@ -1,165 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<log>
-   <date>
-      <entry>Date:</entry>
-      <entry>12/16/2013</entry>
-   </date>
-   <inboxCheck1>
-      <entry>Inbox Check 1:</entry>
-      <entry>Complete</entry>
-   </inboxCheck1>
-   <inboxCheck2>
-      <entry>Inbox Check 2:</entry>
-      <entry>Complete</entry>
-   </inboxCheck2>
-   <notes>
-      <entry>Notes:</entry>
-      <entry>These are some notes Brah</entry>
-   </notes>
-   <reportCheck>
-      <entry>Report Check:</entry>
-      <entry>Complete</entry>
-   </reportCheck>
-   <techName>
-      <entry>Tech:</entry>
-      <entry>Daniel</entry>
-   </techName>
-</log>
+<logData>
 
-
-<log>
-   <date>
-      <entry>Date:</entry>
-      <entry>12/13/2013</entry>
-   </date>
-   <inboxCheck1>
-      <entry>Inbox Check 1:</entry>
-      <entry>incomplete</entry>
-   </inboxCheck1>
-   <inboxCheck2>
-      <entry>Inbox Check 2:</entry>
-      <entry>Complete</entry>
-   </inboxCheck2>
-   <notes>
-      <entry>Notes:</entry>
-      <entry>These are some notes</entry>
-   </notes>
-   <reportCheck>
-      <entry>Report Check:</entry>
-      <entry>Incomplete</entry>
-   </reportCheck>
-   <techName>
-      <entry>Tech:</entry>
-      <entry>Jen</entry>
-   </techName>
-</log>
-
-<log>
-   <date>
-      <entry>Date:</entry>
-      <entry>12/13/2013</entry>
-   </date>
-   <inboxCheck1>
-      <entry>Inbox Check 1:</entry>
-      <entry>Complete</entry>
-   </inboxCheck1>
-   <inboxCheck2>
-      <entry>Inbox Check 2:</entry>
-      <entry>Complete</entry>
-   </inboxCheck2>
-   <notes>
-      <entry>Notes:</entry>
-      <entry>These are some notes</entry>
-   </notes>
-   <reportCheck>
-      <entry>Report Check:</entry>
-      <entry>Incomplete</entry>
-   </reportCheck>
-   <techName>
-      <entry>Tech:</entry>
-      <entry>Jon</entry>
-   </techName>
-</log>
-
-<log>
-   <date>
-      <entry>Date:</entry>
-      <entry>12/14/2013</entry>
-   </date>
-   <inboxCheck1>
-      <entry>Inbox Check 1:</entry>
-      <entry>Complete</entry>
-   </inboxCheck1>
-   <inboxCheck2>
-      <entry>Inbox Check 2:</entry>
-      <entry>Complete</entry>
-   </inboxCheck2>
-   <notes>
-      <entry>Notes:</entry>
-      <entry>These are some notes</entry>
-   </notes>
-   <reportCheck>
-      <entry>Report Check:</entry>
-      <entry>Complete</entry>
-   </reportCheck>
-   <techName>
-      <entry>Tech:</entry>
-      <entry>Mike</entry>
-   </techName>
-</log>
-
-<log>
-   <date>
-      <entry>Date:</entry>
-      <entry>12/13/2013</entry>
-   </date>
-   <inboxCheck1>
-      <entry>Inbox Check 1:</entry>
-      <entry>incomplete</entry>
-   </inboxCheck1>
-   <inboxCheck2>
-      <entry>Inbox Check 2:</entry>
-      <entry>Complete</entry>
-   </inboxCheck2>
-   <notes>
-      <entry>Notes:</entry>
-      <entry>These are some notes</entry>
-   </notes>
-   <reportCheck>
-      <entry>Report Check:</entry>
-      <entry>Incomplete</entry>
-   </reportCheck>
-   <techName>
-      <entry>Tech:</entry>
-      <entry>Tabitha</entry>
-   </techName>
-</log>
-
-<log>
-   <date>
-      <entry>Date:</entry>
-      <entry>12/15/2013</entry>
-   </date>
-   <inboxCheck1>
-      <entry>Inbox Check 1:</entry>
-      <entry>incomplete</entry>
-   </inboxCheck1>
-   <inboxCheck2>
-      <entry>Inbox Check 2:</entry>
-      <entry>Complete</entry>
-   </inboxCheck2>
-   <notes>
-      <entry>Notes:</entry>
-      <entry>These are some notes</entry>
-   </notes>
-   <reportCheck>
-      <entry>Report Check:</entry>
-      <entry>Complete</entry>
-   </reportCheck>
-   <techName>
-      <entry>Tech:</entry>
-      <entry>Tony</entry>
-   </techName>
-</log>
-
+	<log>
+	  <techName>Daniel</techName>
+	  <date>12/16/2013</date>
+   	  <check1>Complete</check1>
+      <check2>Complete</check2>
+      <check3>Complete</check3>
+      <notes>These are some notes Brah</notes>  
+	</log>
+	
+	<log>
+	  <techName>Jen</techName>
+	  <date>12/01/2013</date>
+   	  <check1>Complete</check1>
+      <check2>Incomplete</check2>
+      <check3>Complete</check3>
+      <notes>This is another example of notes</notes>  
+	</log>
+	
+	<log>
+	  <techName>Mike</techName>
+	  <date>05/16/2013</date>
+   	  <check1>Complete</check1>
+      <check2>Complete</check2>
+      <check3>Complete</check3>
+      <notes>These are some notes Brah</notes>  
+	</log>
+	
+	<log>
+	  <techName>Jon</techName>
+	  <date>12/29/2013</date>
+   	  <check1>Incomplete</check1>
+      <check2>Complete</check2>
+      <check3>Complete</check3>
+      <notes>This is another example of notes</notes>  
+	</log>
+	
+	<log>
+	  <techName>Tabitha</techName>
+	  <date>10/24/2013</date>
+   	  <check1>Complete</check1>
+      <check2>Incomplete</check2>
+      <check3>Incomplete</check3>
+      <notes>These are some notes Brah</notes>  
+	</log>
+	
+	
+	
+</logData>

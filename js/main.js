@@ -46,34 +46,35 @@ complete - function - always evokes after a retrun
 
 
 $(".jsonDisplay").on("click", function(){
-       
 
 $("#jsonView").empty();
+console.log("jsonView emptied");
+
 $.ajax({
-	url: "xhr/data.js",
-	type: "GET",
-	dataType: "json",
+	url: 'xhr/data.json',
+	type: 'GET',
+	dataType: 'json',
 	 success:function(response){
-	 	console.log(response);
+	 console.log(response);
 		 // successful request; do something with the data
-		for(var i = 0, j = response.json.length; i < j; i++){
-			var item = response.json[i];
+		for(var i=0, j=response.logData.length; i<j; i++){
+			var item = response.logData[i];
 			$('<li class="itemView">' +
-                '<h6>' + item.techName[1] + " :: " + item.date[1] + '</h6>' +
-                '<ul class="bodyText">' +
+                '<h3 style="text-align: center;">' + item.techname + " :: " + item.date + '</h3>' +
+                '<ul class="bodyText" style="list-style: none;">' +
                 '<li id="imgAvatar">' +
-                '<img src="img/' + item.techName[1] + '.png">' +
+                '<img src="img/' + item.techname + '.png">' +
                 '</li>' +
                 '<li>' +
-                '<h6>' + item.inboxCheck1[0] + item.inboxCheck1[1] + '</h6>' +
-                '<h6>' + item.inboxCheck2[0] + item.inboxCheck2[1] + '</h6>' +
-                '<h6>' + item.reportCheck[0] + item.reportCheck[1] + '</h6>' +
-                '<h6>' + item.notes[0] + item.notes[1] + '</h6>' +
+                '<h6>Inbox Check 1: ' + item.check1 + '</h6>' +
+                '<h6>Inbox Check 2: ' + item.check2 + '</h6>' +
+                '<h6>Report Check: ' + item.check3 + '</h6>' +
+                '<h6>Notes: ' + item.notes + '</h6>' +
                 '</li>' +
-                '<a href="#" class="deleteLog" data-key="' + item.key + '" data-role="button" data-mini="true" data-inline="true" data-icon="delete" data-theme="b">Delete</a>' +
-                '<a href="#trackDuty" class="editLog" data-key="' + item.key + '" data-role="button" data-transition="slide" data-mini="true" data-inline="true" data-icon="edit" data-theme="b">Edit</a>' +
                 '</ul>' +
+                '<hr />' +
                 '</li>').appendTo("#jsonView");
+                	 	
 		};
 		
 		
@@ -92,37 +93,43 @@ $.ajax({
   
 $(".xmlDisplay").on("click", function(){
        
-
 $("#xmlView").empty();
+
 $.ajax({
 	url: "xhr/data.xml",
 	type: "GET",
 	dataType: "xml",
-	 success:function(response){
-	 	console.log(response);
-		 // successful request; do something with the data
-		for(var i = 0, j = response.log.length; i < j; i++){
-			var item = response.log[i];
+	 success:function(xml){
+		 // successful request; write data to the DOM
+		$(xml).find("log").each(function(){
+   				var techName = $(this).find('techName').text();
+   				var date = $(this).find('date').text();
+   				var check1 = $(this).find('check1').text();
+   				var check2 = $(this).find('check2').text();
+   				var check3 = $(this).find('check3').text();
+   				var notes = $(this).find('notes').text();
+   				console.log(xml);
 			$('<li class="itemView">' +
-                '<h6>' + item.techName[1] + " :: " + item.date[1] + '</h6>' +
-                '<ul class="bodyText">' +
+                '<h3 style="text-align: center;">' + techName + " :: " + date + '</h3>' +
+                '<ul class="bodyText" style="list-style: none;">' +
                 '<li id="imgAvatar">' +
-                '<img src="img/' + item.techName[1] + '.png">' +
+                '<img src="img/' + techName + '.png">' +
                 '</li>' +
                 '<li>' +
-                '<h6>' + item.inboxCheck1[0] + item.inboxCheck1[1] + '</h6>' +
-                '<h6>' + item.inboxCheck2[0] + item.inboxCheck2[1] + '</h6>' +
-                '<h6>' + item.reportCheck[0] + item.reportCheck[1] + '</h6>' +
-                '<h6>' + item.notes[0] + item.notes[1] + '</h6>' +
+                '<h6>Inbox Check 1: ' + check1 + '</h6>' +
+                '<h6>Inbox Check 2: ' + check2 + '</h6>' +
+                '<h6>Report Check: ' + check3 + '</h6>' +
+                '<h6>Notes: ' + notes + '</h6>' +
                 '</li>' +
-                '<a href="#" class="deleteLog" data-key="' + item.key + '" data-role="button" data-mini="true" data-inline="true" data-icon="delete" data-theme="b">Delete</a>' +
-                '<a href="#trackDuty" class="editLog" data-key="' + item.key + '" data-role="button" data-transition="slide" data-mini="true" data-inline="true" data-icon="edit" data-theme="b">Edit</a>' +
                 '</ul>' +
+                '<hr />' +
                 '</li>').appendTo("#xmlView");
-		};
+		});
 		
-		
+			
 	},
+	
+
 		 error:function(){
 			 // failed request; give feedback to user
 			 $("#xmlView").html("<p class='ajaxError'>You Broke It!</p>");

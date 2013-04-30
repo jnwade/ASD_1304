@@ -1,0 +1,48 @@
+
+
+{
+   "logData":[
+   
+      {
+            "techname":"Daniel",
+            "date":"11/12/2013",
+            "check1":"Complete",
+             "check2":"Incomplete",
+            "check3":"Complete",
+            "notes":"These are some notes Brah"
+      },
+      {
+            "techname":"Jon",
+            "date":"01/23/2013",
+            "check1":"Incomplete",
+             "check2":"Complete",
+            "check3":"Complete",
+            "notes":"These are my notes for the day"
+      },
+      {
+            "techname":"Mike",
+            "date":"12/16/2013",
+            "check1":"Complete",
+             "check2":"Complete",
+            "check3":"Incomplete",
+            "notes":"These are some more notes"
+      },
+      {
+            "techname":"Jen",
+            "date":"09/18/2013",
+            "check1":"Incomplete",
+             "check2":"Incomplete",
+            "check3":"Complete",
+            "notes":"These are some notes I wrote"
+      },
+      {
+            "techname":"Tabitha",
+            "date":"12/16/2013",
+            "check1":"Complete",
+             "check2":"Complete",
+            "check3":"Complete",
+            "notes":"These are some more notes"
+      }
+  ]
+}
+      
