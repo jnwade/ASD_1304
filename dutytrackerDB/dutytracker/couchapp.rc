@@ -3,8 +3,11 @@
     "local": {
       "db": "http://127.0.0.1:5984/dutytracker"
     },
-    "local": {
+    "cloudant1": {
       "db": "https://wastiongtheryoughtsentar:5hDCeuumGTUOrjbLGkJqDVp1@jnwade.cloudant.com/dutytracker"
+    },
+    "cloudant2": {
+      "db": "https://tsentonderynzanderleyett:EQsFQTGSgNgNRu4HUf51ikie@jnwade.cloudant.com/dutytracker2"
     }
   }
 }

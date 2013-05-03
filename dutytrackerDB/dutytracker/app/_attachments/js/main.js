@@ -29,6 +29,18 @@ $("#homePage").on("pagebeforeshow", function () {
 
     //-------------------------------------------------------------------------
 
+	
+	
+
+
+
+				/*
+var name = tech.value.techName[0];
+				var date = tech.value.date[0];
+				var notes = tech.value.notes[0];
+*/
+
+   //-------------------------------------------------------------------------
 
 /*
 Options:
@@ -65,7 +77,7 @@ $("#jsonView").empty();
                 '<h3 style="text-align: center;">' + name + " :: " + date + '</h3>' +
                 '<ul class="bodyText" style="list-style: none;">' +
                 '<li id="imgAvatar">' +
-                '<img src="' + name + '.png">' +
+                '<img src="img/' + name + '.png">' +
                 '</li>' +
                 '<li>' +
                 '<h6>Notes: ' + notes + '</h6>' +
@@ -96,6 +108,58 @@ $("#jsonView").empty();
 
     //End of home Pageinit
 });
+
+	$("#couchDisplay").on("pageshow", function() {
+		$.couch.db("dutytracker").view("dutytracker/techs_alpha_j", {
+			success: function(data) {
+				console.log(data);
+				$("#couchView").empty();
+				console.log("couchView Emptied");
+				$.each(data.rows, function(index, tech){
+				console.log(tech);
+				var techDetails = (tech.value || tech.doc);
+				console.log(techDetails);
+				
+				$('<li class="itemView">' + 
+				  '<a href="tech.html?tech=' + techDetails.techName[1] + '">' + 
+				   techDetails.techName[1] + '</a>' + 
+                               '</li>').appendTo("#couchView");
+			});
+			
+			 $("#couchView").listview('refresh');
+			
+							
+			}
+			
+			
+		});
+		
+		
+		
+	//End couchDisplay 	
+	});
+	
+var urlVars = function() {
+	var urlData = $($.mobile.activePage).data("url");
+	var urlParts = urlData.split("?");
+	var urlPairs = urlParts[1].split("&");
+	var urlValues = {};
+	for (var pair in urlPairs) {
+		var keyValue = urlPairs[pair].split("=");
+		var key = decodeURIComponent(keyValue[0]);
+		var value = decodeURIComponent(keyValue[1]);
+		urlValues[key] = value;
+	}
+	return urlValues;	
+};
+
+$(document).on("pageshow", "#techDetails", function() {
+	var techDetails = urlVars()["tech"];
+	console.log(techDetails);
+	var urlData = $(this).data("url");
+	console.log(urlData);
+	
+	});
 
 
 
@@ -256,7 +320,7 @@ $("#emailData").on('pagebeforeshow', function () {
                 '<h6>' + item.techName[1] + " :: " + item.date[1] + '</h6>' +
                 '<ul class="bodyText">' +
                 '<li id="imgAvatar">' +
-                '<img src="' + item.techName[1] + '.png">' +
+                '<img src="img/' + item.techName[1] + '.png">' +
                 '</li>' +
                 '<li>' +
                 '<h6>' + item.inboxCheck1[0] + item.inboxCheck1[1] + '</h6>' +
