@@ -141,14 +141,18 @@ $("#jsonView").empty();
 	
 var urlVars = function() {
 	var urlData = $($.mobile.activePage).data("url");
+	console.log(urlData);
 	var urlParts = urlData.split("?");
+	console.log(urlParts);
 	var urlPairs = urlParts[1].split("&");
+	console.log(urlPairs);
 	var urlValues = {};
 	for (var pair in urlPairs) {
 		var keyValue = urlPairs[pair].split("=");
 		var key = decodeURIComponent(keyValue[0]);
 		var value = decodeURIComponent(keyValue[1]);
 		urlValues[key] = value;
+		console.log(key);
 	}
 	return urlValues;	
 };
@@ -156,8 +160,9 @@ var urlVars = function() {
 $(document).on("pageshow", "#techDetails", function() {
 	var techDetails = urlVars()["tech"];
 	console.log(techDetails);
-	var urlData = $(this).data("url");
-	console.log(urlData);
+	$.couch.db("dutytracker").view("dutytracker/tech_alpha_j", {
+		key: "tech"  
+	});
 	
 	});
 
