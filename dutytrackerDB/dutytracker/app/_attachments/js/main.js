@@ -29,6 +29,18 @@ $("#homePage").on("pagebeforeshow", function () {
 
     //-------------------------------------------------------------------------
 
+	
+	
+
+
+
+				/*
+var name = tech.value.techName[0];
+				var date = tech.value.date[0];
+				var notes = tech.value.notes[0];
+*/
+
+   //-------------------------------------------------------------------------
 
 /*
 Options:
@@ -48,95 +60,45 @@ complete - function - always evokes after a retrun
 $(".jsonDisplay").on("click", function(){
 
 $("#jsonView").empty();
-console.log("jsonView emptied");
 
-$.ajax({
-	url: 'xhr/data.json',
-	type: 'GET',
-	dataType: 'json',
-	 success:function(response){
-	 console.log(response);
-		 // successful request; do something with the data
-		for(var i=0, j=response.logData.length; i<j; i++){
-			var item = response.logData[i];
-			$('<li class="itemView">' +
-                '<h3 style="text-align: center;">' + item.techname + " :: " + item.date + '</h3>' +
+	$.ajax({
+		url: '/dutytracker/_all_docs/?include_docs=true&start_key=%22Daniel%22&end_key=%22Mike%22',
+		type: 'GET',
+		dataType: 'json',
+		 success:function(response){
+		 console.log(response);
+			$.each(response.rows, function(index, tech){
+				console.log(tech);
+				var name = tech.doc.techName[1];
+				var date = tech.doc.date[1];
+				var notes = tech.doc.notes[1];
+				
+				$('<li class="itemView">' +
+                '<h3 style="text-align: center;">' + name + " :: " + date + '</h3>' +
                 '<ul class="bodyText" style="list-style: none;">' +
                 '<li id="imgAvatar">' +
-                '<img src="img/' + item.techname + '.png">' +
+                '<img src="img/' + name + '.png">' +
                 '</li>' +
                 '<li>' +
-                '<h6>Inbox Check 1: ' + item.check1 + '</h6>' +
-                '<h6>Inbox Check 2: ' + item.check2 + '</h6>' +
-                '<h6>Report Check: ' + item.check3 + '</h6>' +
-                '<h6>Notes: ' + item.notes + '</h6>' +
+                '<h6>Notes: ' + notes + '</h6>' +
                 '</li>' +
                 '</ul>' +
                 '<hr />' +
                 '</li>').appendTo("#jsonView");
-                	 	
-		};
-		$("#jsonView").listview('refresh');
-		
-	},
-		 error:function(){
-			 // failed request; give feedback to user
-			 $("#jsonView").html("<p class='ajaxError'>You Broke It!</p>");
-			 }
-});
+			});
+			
+			$("#jsonView").listview('refresh');
+			
+		}
+
+	});
 
 });
 
 
   //-------------------------------------------------------------------------	
   
-  
-$(".xmlDisplay").on("click", function(){
-       
-$("#xmlView").empty();
 
-$.ajax({
-	url: "xhr/data.xml",
-	type: "GET",
-	dataType: "xml",
-	 success:function(xml){
-		 // successful request; write data to the DOM
-		$(xml).find("log").each(function(){
-   				var techName = $(this).find('techName').text();
-   				var date = $(this).find('date').text();
-   				var check1 = $(this).find('check1').text();
-   				var check2 = $(this).find('check2').text();
-   				var check3 = $(this).find('check3').text();
-   				var notes = $(this).find('notes').text();
-   				console.log(xml);
-			$('<li class="itemView">' +
-                '<h3 style="text-align: center;">' + techName + " :: " + date + '</h3>' +
-                '<ul class="bodyText" style="list-style: none;">' +
-                '<li id="imgAvatar">' +
-                '<img src="img/' + techName + '.png">' +
-                '</li>' +
-                '<li>' +
-                '<h6>Inbox Check 1: ' + check1 + '</h6>' +
-                '<h6>Inbox Check 2: ' + check2 + '</h6>' +
-                '<h6>Report Check: ' + check3 + '</h6>' +
-                '<h6>Notes: ' + notes + '</h6>' +
-                '</li>' +
-                '</ul>' +
-                '<hr />' +
-                '</li>').appendTo("#xmlView");
-		});
-		$("#xmlView").listview('refresh');
-			
-	},
-	
-
-		 error:function(){
-			 // failed request; give feedback to user
-			 $("#xmlView").html("<p class='ajaxError'>You Broke It!</p>");
-			 }
-});
-
-});
   
   
   
@@ -146,6 +108,63 @@ $.ajax({
 
     //End of home Pageinit
 });
+
+	$("#couchDisplay").on("pageshow", function() {
+		$.couch.db("dutytracker").view("dutytracker/techs_alpha_j", {
+			success: function(data) {
+				console.log(data);
+				$("#couchView").empty();
+				console.log("couchView Emptied");
+				$.each(data.rows, function(index, tech){
+				console.log(tech);
+				var techDetails = (tech.value || tech.doc);
+				console.log(techDetails);
+				
+				$('<li class="itemView">' + 
+				  '<a href="tech.html?tech=' + techDetails.techName[1] + '">' + 
+				   techDetails.techName[1] + '</a>' + 
+                               '</li>').appendTo("#couchView");
+			});
+			
+			 $("#couchView").listview('refresh');
+			
+							
+			}
+			
+			
+		});
+		
+		
+		
+	//End couchDisplay 	
+	});
+	
+var urlVars = function() {
+	var urlData = $($.mobile.activePage).data("url");
+	console.log(urlData);
+	var urlParts = urlData.split("?");
+	console.log(urlParts);
+	var urlPairs = urlParts[1].split("&");
+	console.log(urlPairs);
+	var urlValues = {};
+	for (var pair in urlPairs) {
+		var keyValue = urlPairs[pair].split("=");
+		var key = decodeURIComponent(keyValue[0]);
+		var value = decodeURIComponent(keyValue[1]);
+		urlValues[key] = value;
+		console.log(key);
+	}
+	return urlValues;	
+};
+
+$(document).on("pageshow", "#techDetails", function() {
+	var techDetails = urlVars()["tech"];
+	console.log(techDetails);
+	$.couch.db("dutytracker").view("dutytracker/tech_alpha_j", {
+		key: "tech"  
+	});
+	
+	});
 
 
 
